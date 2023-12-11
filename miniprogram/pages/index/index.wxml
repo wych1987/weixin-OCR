@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+
+  <view class="title">番茄小助手</view>
+
+  <view class="top_tip">帮助解决家长的小烦恼</view>
+
+  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
+    <view class="power_info" data-index="{{index}}" bindtap="jumpPage" data-page="{{power.page}}">
+      <view class="power_info_text">
+        <view class="power_info_text_title">{{power.title}}</view>
+        <view class="power_info_text_tip">{{power.tip}}</view>
+      </view>
+    </view>
+   
+  </view>
+  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+
+</view>

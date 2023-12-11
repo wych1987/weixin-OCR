@@ -1,0 +1,4 @@
+<view style="position: relative;">
+ 
+  <canvas type="2d" id="myCanvas" class="canvas-box"></canvas>
+</view>
