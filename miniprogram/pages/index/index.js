@@ -12,21 +12,10 @@ Page({
       page: 'ocr'
     } ,
      {
-      title: '云存储',
-      tip: '自带CDN加速文件存储',
+      title: '文本图像处理',
+      tip: '文本图像矫正、阴影去除、摩尔纹去除等,优化文档类的图片质量，提升文字的清晰度',
       showItem: false,
-      item: [{
-        title: '上传文件',
-        page: 'uploadFile'
-      }]
-    }, {
-      title: '云托管',
-      tip: '不限语言的全托管容器服务',
-      showItem: false,
-      item: [{
-        title: '部署服务',
-        page: 'deployService'
-      }]
+      page:"uploadFile"
     }
   ],
     envList,

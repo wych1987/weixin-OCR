@@ -1,5 +1,5 @@
 export function drawImage(canvas, imgSrc) {
-   const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d')
   return new Promise((reslove, reject) => {
     const img = canvas.createImage()
     img.onload = () => {
@@ -9,7 +9,7 @@ export function drawImage(canvas, imgSrc) {
       reslove({ success: true, data: {} })
     };
     img.onerror = (error) => {
-      console.error("=====error===",error)
+      console.error("=====error===", error)
       reject({ success: false, error: "imgloadError" })
     }
     img.src = imgSrc;

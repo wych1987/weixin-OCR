@@ -1,5 +1,6 @@
 import { drawImage ,drawRectByOCR} from "../../utils/index"
 import {mockData} from "../../utils/mock"
+import {imageData} from "../../utils/mock01"
 Page({
 //https://cloud.tencent.com/document/product/866/80801
   /**
@@ -52,9 +53,9 @@ Page({
         const ctx = canvas.getContext('2d');
      
         // const img = 'https://noway-img.oss-rg-china-mainland.aliyuncs.com/fa2ec2875d501ab2d60862bec74427d1.JPG'
-        const imgTX = "https://img-1320809449.cos.ap-shanghai.myqcloud.com/fa2ec2875d501ab2d60862bec74427d1.JPG"
-        drawImage(canvas, imgTX).then(res => {
-           drawRectByOCR(ctx,mockData.TextDetections)
+        //const imgTX = "https://img-1320809449.cos.ap-shanghai.myqcloud.com/fa2ec2875d501ab2d60862bec74427d1.JPG"
+        drawImage(canvas, imageData.image_processed).then(res => {
+           //drawRectByOCR(ctx,mockData.TextDetections)
         })
       })
   },

@@ -15,33 +15,38 @@
   margin-left: 20rpx;
 }
 
-.box_text {
-  background-color: white;
-  text-align: center;
-  padding: 300rpx 0;
-  margin-top: 30rpx;
-  color: rgba(0, 0, 0, 0.5);
+.box_img {
+  background-color: #fff;
+  height:80vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
-.code_box {
-  text-align: center;
-  background-color: white;
-  margin-top: 30rpx;
-  padding: 50rpx 0 17px 0;
+.box_img_item {
+   width: 33%;
+   box-sizing: border-box;
+   height: calc(80vh/3);
+   background-color: #ededed;
+   border:1px solid #f6f6f6;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
-.code_img {
-  width: 300rpx;
-  height: 300rpx;
+.img_item {
+  flex:1;
 }
 
 .button {
   width: 300rpx;
   text-align: center;
-  margin: 20% auto 0 auto;
+  margin: 20rpx auto 0 auto;
   height: 80rpx;
   color: white;
-  border-radius: 5px;
+  border-radius: 10rpx;
   line-height: 80rpx;
   background-color: #07c160;
 }
@@ -49,12 +54,30 @@
 .button_clear {
   width: 300rpx;
   text-align: center;
-  margin: 20% auto 0 auto;
-  height: 80rpx;
+  margin: 20rpx auto 0 auto;
+  height: 180rpx;
   color: #07c160;
   border-radius: 5px;
   line-height: 80rpx;
   background-color: rgba(0, 0, 0, 0.03);
+}
+
+ .box_img_action{
+   margin-top: 16rpx;
+   text-align: center;
+   color:#fff;
+   width: 100%;
+ }
+ 
+.button_clear {
+  width: 300rpx;
+  text-align: center;
+  margin: 20rpx auto 0 auto;
+  height: 80rpx;
+  color: #07c160;
+  border-radius: 5px;
+  line-height: 80rpx;
+  background-color: #fff;
 }
 
 .img_info {
@@ -72,8 +95,6 @@
   font-family: PingFang SC;
   font-weight: 400;
   color: #888888;
-  width: 72px;
-  margin-right: 32px;
 }
 
 .img_info_detail {
@@ -83,4 +104,13 @@
   font-weight: 400;
   color: #000000;
   width: 500rpx;
+}
+ 
+.swiper{
+  background-color: #e3e3e3;
+  height:100vh;
+}
+.swiper-item{
+  height:100vh;
+  width:100vw;
 }

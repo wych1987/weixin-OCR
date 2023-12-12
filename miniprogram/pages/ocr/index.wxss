@@ -1,5 +1,11 @@
+page-root{
+  position: relative;
+  background-color: darkgray;
+  width: 100vw;
+  height: 100%;
+}
 .canvas-box{
-  height:100vh;
+  height:calc(100vh - 160rpx);
   width:100vw;
   background-color: darkgray;
   position: relative;
@@ -14,7 +20,7 @@
   padding: 0 10rpx;
   width:100vw;
   z-index: 100;
-  background-color: #e3e3e356;
+  
   display: flex;
   flex-direction: row;
   justify-content: space-between;

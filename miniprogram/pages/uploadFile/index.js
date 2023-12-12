@@ -1,3 +1,6 @@
+import { uploadMediaChoose} from "../../utils/clouldFile"
+import {fetchOcrBaidu} from "../../api/index"
+import{imageData} from "../../utils/mock01"
 Page({
 
   /**
@@ -6,53 +9,55 @@ Page({
   data: {
     showUploadTip: false,
     haveGetImgSrc: false,
-    envId: '',
-    imgSrc: ''
+    imgUrls: [],
+    ocrImgs:[imageData,imageData,imageData]
   },
 
   onLoad(options) {
-    this.setData({
-      envId: options.envId
-    });
+
   },
 
   uploadImg() {
-    wx.showLoading({
-      title: '',
-    });
-    // 让用户选择一张图片
-    wx.chooseImage({
-      count: 1,
-      success: chooseResult => {
-        // 将图片上传至云存储空间
-        wx.cloud.uploadFile({
-          // 指定上传到的云路径
-          cloudPath: 'my-photo.png',
-          // 指定要上传的文件的小程序临时文件路径
-          filePath: chooseResult.tempFilePaths[0],
-          config: {
-            env: this.data.envId
-          }
-        }).then(res => {
-          console.log('上传成功', res);
-          this.setData({
-            haveGetImgSrc: true,
-            imgSrc: res.fileID
-          });
-          wx.hideLoading();
-        }).catch((e) => {
-          console.log(e);
-          wx.hideLoading();
-        });
-      },
-    });
+      // 让用户选择图片
+    wx.chooseMedia({
+      count: 9,
+      mediaType: ['image'],
+      sourceType: ['album', 'camera'],
+      sizeType: ['original'],
+      camera: 'back',
+    }).then(chooseResult => {
+      //
+      console.log(chooseResult)
+      this.setData({
+        imgUrls: chooseResult.tempFiles
+      })
+    }
+    ).catch(e => {
+      console.error("chooseMedia===", e)
+    })
   },
 
   clearImgSrc() {
     this.setData({
-      haveGetImgSrc: false,
-      imgSrc: ''
+      imgUrls:[]
     });
+  },
+  async ocrClearImg() {
+    // 把这些图片上传到云端
+    wx.showLoading({
+      title: '图片正在处理',
+    });
+    const {fileList} = await uploadMediaChoose(this.data.imgUrls);
+    console.log("===img",res.fileList[0].tempFileURL)
+    // 挨个把图片给服务端处理
+    const resultImgOcr = []
+    fileList.map(async (item)=>{
+      const res = await fetchOcrBaidu(item.tempFileURL);
+      resultImgOcr.push(res);
+    });
+    this.setData({
+      ocrImgs:resultImgOcr
+    });
+    wx.hideLoading()
   }
-
 });
