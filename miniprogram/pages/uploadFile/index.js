@@ -1,6 +1,6 @@
-import { uploadMediaChoose} from "../../utils/clouldFile"
-import {fetchOcrBaidu} from "../../api/index"
-import{imageData} from "../../utils/mock01"
+import { uploadMediaChoose, base64src } from "../../utils/clouldFile"
+import { fetchOcrBaidu } from "../../api/index"
+import { imageData } from "../../utils/mock01"
 Page({
 
   /**
@@ -10,15 +10,17 @@ Page({
     showUploadTip: false,
     haveGetImgSrc: false,
     imgUrls: [],
-    ocrImgs:[imageData,imageData,imageData]
+    ocrImgs: []
   },
 
   onLoad(options) {
-
+    
+      
+    
   },
 
   uploadImg() {
-      // 让用户选择图片
+    // 让用户选择图片
     wx.chooseMedia({
       count: 9,
       mediaType: ['image'],
@@ -39,7 +41,7 @@ Page({
 
   clearImgSrc() {
     this.setData({
-      imgUrls:[]
+      imgUrls: []
     });
   },
   async ocrClearImg() {
@@ -47,17 +49,24 @@ Page({
     wx.showLoading({
       title: '图片正在处理',
     });
-    const {fileList} = await uploadMediaChoose(this.data.imgUrls);
-    console.log("===img",res.fileList[0].tempFileURL)
-    // 挨个把图片给服务端处理
-    const resultImgOcr = []
-    fileList.map(async (item)=>{
-      const res = await fetchOcrBaidu(item.tempFileURL);
-      resultImgOcr.push(res);
-    });
-    this.setData({
-      ocrImgs:resultImgOcr
-    });
-    wx.hideLoading()
+    try {
+      const {fileList} = await uploadMediaChoose(this.data.imgUrls);
+      // 挨个把图片给服务端处理
+      const resultImgOcr = []
+      fileList.map(async (item) => {
+        const res = await fetchOcrBaidu(item.tempFileURL);
+        const tempUrl = await base64src(res.data)
+        resultImgOcr.push({ url: tempUrl });
+        this.setData({
+          ocrImgs: [...resultImgOcr]
+        });
+      });
+      wx.hideLoading()
+    } catch (e) {
+      wx.showToast({
+        title: '稍等，有异常',
+      })
+      wx.hideLoading()
+    }
   }
 });

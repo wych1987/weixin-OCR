@@ -32,9 +32,16 @@
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ],
+    "minifyWXSS": true,
+    "condition": false,
+    "compileWorklet": false
   },
   "appid": "wxf35a2769c0de7b57",
   "projectname": "quickstart-wx-cloud",

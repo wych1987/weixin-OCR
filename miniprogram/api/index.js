@@ -9,9 +9,10 @@ async function requestGet(path){
       "content-type": "application/json"
     },
     "method": "GET",
+    "data": ""
   })
 }
-
 export async function fetchOcrBaidu(imgUrl){
-  return  await requestGet(`/api/baidu_ocr?imgSrc=${encodeURIComponent(imgUrl)}`)
+  const res =  await requestGet(`/api/baidu_ocr?imgSrc=${encodeURIComponent(imgUrl)}`)
+  return res.data;
 } 

@@ -1,4 +1,4 @@
-
+import { decode } from "./base64"
 export function uploadFile(filePaths) {
   const arr = []
   filePaths.forEach(filePath => {
@@ -39,7 +39,6 @@ export async function uploadMediaChoose(tempFilePaths) {
   // 将图片上传至云存储空间
   try {
     const cloudPath = await uploadFile(tempFilePaths);
-    debugger;
     const fileIdList = []
     cloudPath.map(item => {
       console.log(item.fileID)
@@ -48,10 +47,39 @@ export async function uploadMediaChoose(tempFilePaths) {
       }
     });
     // 用云文件 ID 换取真实链接
-    const urls = await getFileURL(fileIdList)
-    return urls
+    return await getFileURL(fileIdList)
   } catch (e) {
     console.error("===uploadMediaChoose===", e)
     wx.hideLoading()
   }
 }
+
+
+// const FILE_BASE_NAME = 'textImg'; //自定义文件名
+
+/**
+ * 对于base64形式图片进行存储处理，在回调中返回写入内存的文件路径
+ * @param {String} base64data base64格式数据
+ * @param {String} FILE_BASE_NAME 图片名，不带后缀
+ * @param {Function} cb 回调函数，函数得到的参数为文件路径，可直接赋值给src
+ */
+export function base64src(base64data) {
+  return new Promise((resolve, reject) => {
+    const fsm = wx.getFileSystemManager()
+    const FILE_BASE_NAME = (Math.random()*10000000).toFixed();
+    const filePath = `${wx.env.USER_DATA_PATH}/temp_${FILE_BASE_NAME}.jpeg`;
+    const buffer = decode(base64data);
+    fsm.writeFile({
+      filePath,
+      data: buffer,
+      encoding: 'binary',
+      success() {
+        resolve(filePath + "?flg=" + new Date().getTime());
+      },
+      fail() {
+        reject(new Error('ERROR_BASE64SRC_WRITE'));
+      },
+    });
+  })
+
+};

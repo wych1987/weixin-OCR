@@ -13,12 +13,13 @@
   <view class="button_clear" bindtap="clearImgSrc" wx:if="{{imgUrls.length}}">清空图片</view>
 </view>
 <view class="swiper" wx:if="{{ocrImgs.length}}">
-      <swiper indicator-dots="true">
+      <swiper indicator-dots="true" class="swiper-box">
         <block wx:for="{{ocrImgs}}" wx:key="index" wx:for-item="ocr">
-          <swiper-item>
-            <image class="swiper-item" src="{{ocr.image_processed}}"></image>
+          <swiper-item class="swiper-item">
+            <image class="swiper-item-img" mode="aspectFit" src="{{ocr.url}}"></image>
           </swiper-item>
         </block>
       </swiper>
+      <Text class="img_info_swiper" >长按图片保存</Text>
     </view>
 </view>
