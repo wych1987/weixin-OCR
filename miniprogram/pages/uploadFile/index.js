@@ -55,8 +55,9 @@ Page({
       const resultImgOcr = []
       fileList.map(async (item) => {
         const res = await fetchOcrBaidu(item.tempFileURL);
-        const tempUrl = await base64src(res.data)
-        resultImgOcr.push({ url: tempUrl });
+        //const tempUrl = await base64src(res.data)
+       // resultImgOcr.push({ url: tempUrl });
+       resultImgOcr.push({ url: `data:image/png;base64,${res.data}` });
         this.setData({
           ocrImgs: [...resultImgOcr]
         });
