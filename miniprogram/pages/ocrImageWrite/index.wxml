@@ -1,0 +1,8 @@
+<view class="page-root">
+  <canvas type="2d" id="myCanvas" class="canvas-box"></canvas>
+  <view class="canvas-box-shadow">
+    <view class="canvas--action-item" wx:for="{{actionList}}" wx:for-item="actionItem" data-index="{{index}}" bindtap="actionClick" data-tasktype="{{actionItem.tasktype}}">
+      <text class="canvas--action-item-txt">{{actionItem.text}}</text>
+    </view>
+  </view>
+</view>

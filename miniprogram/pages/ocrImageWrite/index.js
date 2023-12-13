@@ -1,5 +1,4 @@
 import { drawImage ,drawRectByOCR,drawRectByOCRBaidu} from "../../utils/index"
-
 Page({
 //https://cloud.tencent.com/document/product/866/80801
   /**

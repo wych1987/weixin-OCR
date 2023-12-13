@@ -1,6 +1,6 @@
 // index.js
 // const app = getApp()
-const { envList } = require('../../envList.js');
+ 
 
 Page({
   data: {
@@ -16,52 +16,19 @@ Page({
       tip: '文本图像矫正、阴影去除、摩尔纹去除等,优化文档类的图片质量，提升文字的清晰度',
       showItem: false,
       page:"ocr"
+    },
+    {
+      title: '口算训练',
+      tip: '100以内的口算训练',
+      showItem: false,
+      page:"numberShow"
     }
-  ],
-    envList,
-    selectedEnv: envList[0],
-    haveCreateCollection: false
+  ]
   },
 
-  onClickPowerInfo(e) {
-    const index = e.currentTarget.dataset.index;
-    const powerList = this.data.powerList;
-    powerList[index].showItem = !powerList[index].showItem;
-    if (powerList[index].title === '数据库' && !this.data.haveCreateCollection) {
-      this.onClickDatabase(powerList);
-    } else {
-      this.setData({
-        powerList
-      });
-    }
-  },
-
-  onChangeShowEnvChoose() {
-    wx.showActionSheet({
-      itemList: this.data.envList.map(i => i.alias),
-      success: (res) => {
-        this.onChangeSelectedEnv(res.tapIndex);
-      },
-      fail (res) {
-        console.log(res.errMsg);
-      }
-    });
-  },
-
-  onChangeSelectedEnv(index) {
-    if (this.data.selectedEnv.envId === this.data.envList[index].envId) {
-      return;
-    }
-    const powerList = this.data.powerList;
-    powerList.forEach(i => {
-      i.showItem = false;
-    });
-    this.setData({
-      selectedEnv: this.data.envList[index],
-      powerList,
-      haveCreateCollection: false
-    });
-  },
+ 
+  
+ 
 
   jumpPage(e) {
     wx.navigateTo({
@@ -69,34 +36,6 @@ Page({
     });
   },
 
-  onClickDatabase(powerList) {
-    wx.showLoading({
-      title: '',
-    });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: this.data.selectedEnv.envId
-      },
-      data: {
-        type: 'createCollection'
-      }
-    }).then((resp) => {
-      if (resp.result.success) {
-        this.setData({
-          haveCreateCollection: true
-        });
-      }
-      this.setData({
-        powerList
-      });
-      wx.hideLoading();
-    }).catch((e) => {
-      console.log(e);
-      this.setData({
-        showUploadTip: true
-      });
-      wx.hideLoading();
-    });
-  }
+   
+ 
 });

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "聚合记录",
+  "navigationBarTitleText": "我的图片",
   "usingComponents": {
     "cloud-tip-modal": "/components/cloudTipModal/index"
   }

@@ -3,7 +3,7 @@
 
   <view class="title">番茄小助手</view>
 
-  <view class="top_tip">解决家长的小烦恼</view>
+  <view class="top_tip">解决家长的带娃的烦恼</view>
 
   <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
     <view class="power_info" data-index="{{index}}" bindtap="jumpPage" data-page="{{power.page}}">

@@ -1,0 +1,45 @@
+page-root{
+  position: relative;
+  background-color: darkgray;
+  width: 100vw;
+  height: 100%;
+}
+.canvas-box{
+  height:calc(100vh - 160rpx);
+  width:100vw;
+  background-color: darkgray;
+  position: relative;
+  z-index: 10;
+}
+.canvas-box-shadow{
+  position: fixed;
+  bottom:40rpx;
+  left: 0;
+  height:100rpx;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  width:100vw;
+  z-index: 100;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.canvas--action-item{
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  border:2rpx solid #eee;
+  text-align: center;
+  text-justify: middle;
+  display: flex;
+  margin-right: 10rpx;
+}
+.canvas--action-item:last-child{
+  margin-right: 0;
+}
+.canvas--action-item-txt{
+  color:#ff8907;
+  justify-content: center;
+  align-items: center;
+}
