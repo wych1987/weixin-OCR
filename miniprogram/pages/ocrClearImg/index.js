@@ -1,6 +1,6 @@
 import { uploadMediaChoose, base64src } from "../../utils/clouldFile"
-import { fetchOcrBaidu,fetchOcrTx } from "../../api/index"
- 
+import { fetchOcrBaidu, fetchOcrTx, getOcrChannel } from "../../api/index"
+
 Page({
 
   /**
@@ -10,13 +10,18 @@ Page({
     showUploadTip: false,
     haveGetImgSrc: false,
     imgUrls: [],
-    ocrImgs: []
+    ocrImgs: [],
+    ocrChannel: "youdao"// baidu|youdao
   },
 
   onLoad(options) {
-    
-      
-    
+
+    getOcrChannel().then(res => {
+      this.setData({
+        ocrChannel:res.data
+      })
+    })
+
   },
 
   uploadImg() {
@@ -40,7 +45,7 @@ Page({
   clearImgSrc() {
     this.setData({
       imgUrls: [],
-      ocrImgs:[]
+      ocrImgs: []
     });
   },
   async ocrClearImg() {
@@ -49,16 +54,25 @@ Page({
       title: '图片正在处理',
     });
     try {
-      const {fileList} = await uploadMediaChoose(this.data.imgUrls);
+      const { fileList } = await uploadMediaChoose(this.data.imgUrls);
       // 挨个把图片给服务端处理
       const resultImgOcr = []
-      for(let index = 0; index<fileList.length;index++){
+      for (let index = 0; index < fileList.length; index++) {
         const item = fileList[index];
-        const res = await fetchOcrTx(item.tempFileURL);
+        let res = {};
+        switch (this.data.ocrChannel) {
+          case "baidu":
+           res = await fetchOcrBaidu(item.tempFileURL);
+            break;
+          case "youdao":
+          default:
+           res = await fetchOcrTx(item.tempFileURL);
+            break
+        }
         resultImgOcr.push({ url: `data:image/jpg;base64,${res.data}` });
-         this.setData({
-           ocrImgs: [...resultImgOcr]
-         });
+        this.setData({
+          ocrImgs: [...resultImgOcr]
+        });
       }
       wx.hideLoading()
     } catch (e) {
