@@ -1,25 +1,31 @@
 import {playSuccess,playError} from "../../utils/media";
+import {rodomMathTopic} from "../../utils/mathTopic"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showUploadTip: false,
-    haveGetRecord: false,
-    envId: '',
-    record: ''
+    audioChecked:true,
+    symbolArray:["＋","-","×","÷"],
+    topic:{ num1: "",
+      num2: "",
+      symbolStr:"",
+      result:""}
   },
 
-  onLoad(options) {
-    playSuccess();
-    setTimeout(()=>{
-      playError()
-    },3000)
+  onLoad() {
+      const topic = rodomMathTopic()
+      this.setData({topic})
   },
 
-  goBack() {
-   wx.navigateBack();
+   
+  audioSwitchChange(event){
+    const detail = event.detail;
+    this.setData({audioChecked:detail.value});
   },
-
+  changeTopic(){
+    const topic = rodomMathTopic()
+    this.setData({topic})
+  }
 });

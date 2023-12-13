@@ -3,12 +3,12 @@ const innerAudioContext = wx.createInnerAudioContext({
 });
 const successAudio = "https://noway-img.oss-rg-china-mainland.aliyuncs.com/success.wav";
 const errorAudio = "https://noway-img.oss-rg-china-mainland.aliyuncs.com/error.wav";
- export const playSuccess = ()=>{
-  innerAudioContext.src=successAudio;
+export const playSuccess = () => {
+  innerAudioContext.src = successAudio;
   innerAudioContext.play()
- }
- export const playError = ()=>{
-  innerAudioContext.src=errorAudio;
+}
+export const playError = () => {
+  innerAudioContext.src = errorAudio;
   innerAudioContext.play()
- }
- 
+}
+
