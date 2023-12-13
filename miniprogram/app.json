@@ -5,7 +5,7 @@
     "pages/getMiniProgramCode/index",
     "pages/deployService/index",
     "pages/createCollection/index",
-    "pages/uploadFile/index",
+    "pages/ocrClearImg/index",
     "pages/selectRecord/index",
     "pages/updateRecord/index",
     "pages/updateRecordResult/index",

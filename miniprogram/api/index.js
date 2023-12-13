@@ -16,3 +16,7 @@ export async function fetchOcrBaidu(imgUrl){
   const res =  await requestGet(`/api/baidu_ocr?imgSrc=${encodeURIComponent(imgUrl)}`)
   return res.data;
 } 
+export async function fetchOcrTx(imgUrl){
+  const res =  await requestGet(`/api/tx_ocr?imgSrc=${encodeURIComponent(imgUrl)}`)
+  return res.data;
+}

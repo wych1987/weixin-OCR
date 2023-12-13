@@ -23,6 +23,16 @@ export function drawRectByOCR(ctx, ocrData) {
     drawByPath(ctx, item.Polygon)
   })
 }
+export function drawRectByOCRBaidu(ctx, ocrData) {
+  ctx.strokeStyle = "#cf157d94";
+  ctx.fillStyle = "#ff890756";
+  ocrData.forEach(item => {
+    drawByRect(ctx,item.location)
+  })
+}
+function drawByRect(ctx,rect){
+  ctx.fillRect(rect.left, rect.top,rect.width, rect.height);
+}
 function drawByPath(ctx, pathArray) {
   ctx.beginPath();
   const { X, Y } = pathArray[0];

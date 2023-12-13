@@ -1,6 +1,6 @@
 import { uploadMediaChoose, base64src } from "../../utils/clouldFile"
-import { fetchOcrBaidu } from "../../api/index"
-import { imageData } from "../../utils/mock01"
+import { fetchOcrBaidu,fetchOcrTx } from "../../api/index"
+ 
 Page({
 
   /**
@@ -53,15 +53,14 @@ Page({
       const {fileList} = await uploadMediaChoose(this.data.imgUrls);
       // 挨个把图片给服务端处理
       const resultImgOcr = []
-      fileList.map(async (item) => {
-        const res = await fetchOcrBaidu(item.tempFileURL);
-        //const tempUrl = await base64src(res.data)
-       // resultImgOcr.push({ url: tempUrl });
-       resultImgOcr.push({ url: `data:image/png;base64,${res.data}` });
-        this.setData({
-          ocrImgs: [...resultImgOcr]
-        });
-      });
+      for(let index = 0; index<fileList.length;index++){
+        const item = fileList[index];
+        const res = await fetchOcrTx(item.tempFileURL);
+        resultImgOcr.push({ url: `data:image/jpg;base64,${res.data}` });
+         this.setData({
+           ocrImgs: [...resultImgOcr]
+         });
+      }
       wx.hideLoading()
     } catch (e) {
       wx.showToast({
