@@ -28,8 +28,6 @@ Page({
       sizeType: ['original'],
       camera: 'back',
     }).then(chooseResult => {
-      //
-      console.log(chooseResult)
       this.setData({
         imgUrls: chooseResult.tempFiles
       })
@@ -41,7 +39,8 @@ Page({
 
   clearImgSrc() {
     this.setData({
-      imgUrls: []
+      imgUrls: [],
+      ocrImgs:[]
     });
   },
   async ocrClearImg() {
