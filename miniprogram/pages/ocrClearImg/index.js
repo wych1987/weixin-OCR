@@ -27,7 +27,7 @@ Page({
   uploadImg() {
     // 让用户选择图片
     wx.chooseMedia({
-      count: 9,
+      count: 1,
       mediaType: ['image'],
       sourceType: ['album', 'camera'],
       sizeType: ['original'],

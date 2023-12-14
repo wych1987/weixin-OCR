@@ -41,7 +41,6 @@ export async function uploadMediaChoose(tempFilePaths) {
     const cloudPath = await uploadFile(tempFilePaths);
     const fileIdList = []
     cloudPath.map(item => {
-      console.log(item.fileID)
       if (item.status === "fulfilled") {
         fileIdList.push(item.value.fileID);
       }

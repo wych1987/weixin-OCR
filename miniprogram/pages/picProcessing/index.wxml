@@ -1,0 +1,16 @@
+<view class="page-root">
+  <view class="box_img">
+      <view wx:key="index" class="box_img_item" wx:for="{{imgUrls}}" wx:for-item="img">
+        <image class="img_item" mode="aspectFit" src="{{img.tempFilePath}}" bindload="imageOnload"></image>
+      </view>
+      <view class="box_img_action" wx:if="{{!imgUrls.length}}">
+        <text class="img_info_title">图片大小不超过8M</text>
+        <view class="button" bindtap="uploadImg" wx:if="{{!haveGetImgSrc}}">选择一张图片</view>
+      </view>
+    </view>
+  <view class="canvas-action-box">
+    <view class="canvas-action-item" wx:for="{{actionList}}" wx:key="text"  data-index="{{index}}" bindtap="actionClick" data-tasktype="{{item.tasktype}}">
+      <text class="canvas-action-item-txt">{{item.text}}</text>
+    </view>
+  </view>
+</view>

@@ -10,7 +10,7 @@
     "pages/updateRecord/index",
     "pages/updateRecordResult/index",
     "pages/updateRecordSuccess/index",
-    "pages/ocr/index",
+    "pages/picProcessing/index",
     "pages/numberTopic/index"
   ],
   "window": {

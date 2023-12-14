@@ -1,5 +1,6 @@
 import { playSuccess, playError } from "../../utils/media";
 import { rodomMathTopic,verifyTopic } from "../../utils/mathTopic"
+let timer = 0;
 Page({
 
   /**
@@ -26,8 +27,11 @@ Page({
     this.changeTopic();
 
   },
+  onUnload(){
+    clearInterval(timer)
+  },
   timer(){
-    setInterval(()=>{
+    timer * setInterval(()=>{
       const topicTime = this.data.topicTime;
       this.setData({
         topicTime:topicTime+1

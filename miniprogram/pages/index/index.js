@@ -12,10 +12,10 @@ Page({
       page: 'ocrClearImg'
     } ,
      {
-      title: '文本图像处理',
-      tip: '文本图像矫正、阴影去除、摩尔纹去除等,优化文档类的图片质量，提升文字的清晰度',
+      title: '文本图片处理',
+      tip: '文本图片矫正、阴影去除、摩尔纹去除等,优化文档类的图片质量，提升文字的清晰度',
       showItem: false,
-      page:"ocr"
+      page:"picProcessing"
     },
     {
       title: '口算训练',

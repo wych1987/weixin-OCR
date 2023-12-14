@@ -5,6 +5,7 @@ export function drawImage(canvas, imgSrc) {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
+      debugger;
       ctx.drawImage(img, 0, 0, img.width, img.height);
       reslove({ success: true, data: {} })
     };
@@ -43,4 +44,10 @@ function drawByPath(ctx, pathArray) {
   }
   ctx.fill();
   ctx.closePath();
+}
+export const _image_MaxSize = 5000000;
+export const _image_Type = "image/jpeg";
+export const _image_base64_head = "data:image/jpeg;base64,"
+export const replaceImageBase64Head = (base64Str)=>{
+  return base64Str.replace(_image_base64_head,"");
 }
