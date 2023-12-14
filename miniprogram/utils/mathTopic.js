@@ -1,24 +1,25 @@
 export const rodomMathTopic = () => {
   const num = (Math.random() * 100).toFixed() % 4;
-  const symbolArray = ["＋", "-", "×", "÷"]
-  let result = {}
+  const symbolArray = ["+", "-", "×", "÷"]
+  let res = {}
   switch (num) {
     case 0://+
-      result = sumTopic()
+      res = sumTopic()
       break;
-
     case 1://-
-      result = subTopic()
+      res = subTopic()
       break;
     case 2://*
-      result = mulTopic()
+      res = mulTopic()
       break;
     case 3:// 除
-      result = divTopic()
+      res = divTopic()
       break;
   }
-  result.symbolStr = symbolArray[num]
-  return result
+  res.symbolStr = symbolArray[num]
+  res.resultStrArray = res.result.toString().split("")
+  res.symbolNum = num;
+  return res
 }
 
 function sumTopic() {
@@ -54,4 +55,12 @@ function divTopic() {
     num2: res.num2,
     result: res.num1
   }
+}
+export function verifyTopic(result,input){
+  for(let index = 0;index<result.length;index++){
+    if(result[index]!==input[index]){
+      return false;
+    }
+  }
+  return true;
 }

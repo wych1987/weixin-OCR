@@ -25,3 +25,25 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
+.button {
+  width: 300rpx;
+  text-align: center;
+  margin: 10rpx auto 0 auto;
+  height: 80rpx;
+  color: white;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  background-color: #07c160;
+  padding:0;
+}
+
+.button_clear {
+  width: 160rpx;
+  text-align: center;
+  margin: 30rpx auto 0 auto;
+  height: 80rpx;
+  color: #07c160;
+  border-radius: 5px;
+  line-height: 80rpx;
+  background-color: rgba(255, 255, 255, 0.8);
+}

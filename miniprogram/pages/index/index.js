@@ -25,11 +25,6 @@ Page({
     }
   ]
   },
-
- 
-  
- 
-
   jumpPage(e) {
     wx.navigateTo({
       url: `/pages/${e.currentTarget.dataset.page}/index`,

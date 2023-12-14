@@ -28,7 +28,7 @@
   align-items: flex-end;
 }
 .number-input{
-  width:100rpx;
+  width:70rpx;
   height:100rpx;
   border:4rpx solid #07c160;
   background-color: #fff;
@@ -36,13 +36,13 @@
   font-size: 100rpx;
   font-weight: 700;
   text-align: center;
-  margin-left: 16rpx;
+  margin-left: 8rpx;
   color:#ff8907
 }
 .number-cell-line{
   background-color: #333;
   height:8rpx;
-  width:80%;
+  width:90%;
   margin-right: -20rpx;
   margin-bottom: 10rpx;
 }
@@ -53,18 +53,26 @@
   align-items: center;
 }
 .number-cell,
-.number-text,.number-symbol{
+.number-text{
   letter-spacing: 16rpx;
-  line-height: 100rpx;
-  font-size: 80rpx;
+  line-height: 120rpx;
+  font-size: 120rpx;
   font-weight: 700;
   text-align: right;
-  height:100rpx;
-  width:100%;
+  height:120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+.number-cell-text,.number-input{
+  flex:1;
 }
 .number-symbol{
-  margin-left: -1em;
   color:#07c160;
+  margin-top: -18rpx;
+  font-size: 120rpx;
+  font-weight: 700;
 }
 .button {
   width: 300rpx;
@@ -76,3 +84,18 @@
   line-height: 80rpx;
   background-color: #07c160;
 }
+.number-cell,.number-cell-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+}
+.number-cell-input .number-symbol-result{
+  color:#ff8907;
+  position: absolute;
+  right:3em;
+  height:120rpx;
+  line-height: 120rpx;
+}
+ 
