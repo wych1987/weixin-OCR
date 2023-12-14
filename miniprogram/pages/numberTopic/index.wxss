@@ -1,12 +1,13 @@
 @import "../../lib/weui.wxss";
 
 .page-body {
-  padding:10rpx 20rpx;
+  padding:20rpx 20rpx;
 }
 .page-title{
-  font-size: 28rpx;
+  font-size: 38rpx;
   text-align: center;
-  height:40rpx;
+  height:60rpx;
+  line-height: 60rpx;
 }
 .page-section{
   margin-bottom: 20rpx;
@@ -17,8 +18,8 @@
   line-height: 44px;
 }
 .number-show-box{
-  margin-top: 50rpx;
-  margin-bottom: 80rpx;
+  margin-top: 16rpx;
+  margin-bottom: 20rpx;
   height:80vw;
   background-color: #fff;
   padding-right: 30%;
@@ -44,7 +45,7 @@
   height:8rpx;
   width:90%;
   margin-right: -20rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
 }
 .number-cell-input{
   display: flex;
@@ -98,4 +99,16 @@
   height:120rpx;
   line-height: 120rpx;
 }
- 
+ .topic-result-box{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+ }
+ .topic-result-item{
+   display: flex;
+   flex-direction: row;
+   height:60rpx;
+   align-items: center;
+   justify-content: center;
+ }

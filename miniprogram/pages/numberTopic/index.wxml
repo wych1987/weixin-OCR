@@ -1,0 +1,44 @@
+<view class="page-body">
+  <View class="page-title">
+    <text>小学两位数加减乘除口算训练</text>
+  </View>
+  <form bindsubmit="submit">
+    <view class="number-show-box">
+      <View class="number-cell">
+        <text class="number-text">{{topic.num1}}</text>
+      </View>
+
+      <View class="number-cell">
+        <text class="number-symbol">{{topic.symbolStr}}</text>
+        <text class="number-text">{{topic.num2}}</text>
+      </View>
+      <view class="number-cell-line"></view>
+      <view class="number-cell-input">
+        <text class="number-symbol number-symbol-result">=</text>
+        <input class="number-input" bindinput="bindNumberInput" name="{{index}}" value="{{inputArray[index]}}" type="number" focus="{{index===focusIndex}}" maxlength="1" wx:for="{{topic.resultStrArray}}" wx:for-item="num" data-num="{{num}}" data-index="{{index}}" />
+      </view>
+    </view>
+    <button form-type="submit" class="button">确定</button>
+  </form>
+  <view class="button_clear" bindtap="changeTopic">换一题</view>
+  <view class="section section_gap">
+    <view class="section__title">
+      <text style="margin-right: 10rpx;">音效</text>
+      <switch checked="{{audioChecked}}" bindchange="audioSwitchChange" />
+    </view>
+    <view class="topic-result-box">
+      <view class="topic-result-item">
+        <text>提交正确答案：</text>
+        <text class="topic-result-num">{{topicRight}}</text>
+      </view>
+      <view class="topic-result-item">
+        <text>提交错误答案：</text>
+        <text class="topic-result-num">{{topicError}}</text>
+      </view>
+      <view class="topic-result-item">
+        <text>总计时：</text>
+        <text class="topic-result-num">{{topicTime}}</text>
+      </view>
+    </view>
+  </view>
+</view>

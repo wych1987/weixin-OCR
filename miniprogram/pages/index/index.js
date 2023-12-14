@@ -21,7 +21,7 @@ Page({
       title: '口算训练',
       tip: '两位数的口算训练',
       showItem: false,
-      page:"numberShow"
+      page:"numberTopic"
     }
   ]
   },
