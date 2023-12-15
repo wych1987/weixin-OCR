@@ -25,8 +25,16 @@ function getFileInfoByPath(path) {
   const pathArray = path.split("/")
   return {
     fileName: pathArray[pathArray.length - 1],
-    random: (Math.random() * 100000).toFixed(0)
+    random: randomFileName()
   }
+}
+export function randomFileName(){
+    const now = new Date();
+    const num = (Math.random() * 100000000).toFixed(0);
+    return `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}-${num}`
+}
+export function randomFileNameTxt(){
+  return randomFileName()+".txt"
 }
 export async function getFileURL(clouldFilePath) {
   const res = await wx.cloud.getTempFileURL({

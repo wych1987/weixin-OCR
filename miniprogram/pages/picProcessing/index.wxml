@@ -1,7 +1,7 @@
 <view class="page-root">
   <view class="box_img">
       <view wx:key="index" class="box_img_item" wx:for="{{imgUrls}}" wx:for-item="img">
-        <image class="img_item" mode="aspectFit" src="{{img.tempFilePath}}" bindload="imageOnload"></image>
+        <image class="img_item" mode="aspectFit" src="{{img.tempFilePath||img.url}}" bindload="imageOnload"></image>
       </view>
       <view class="box_img_action" wx:if="{{!imgUrls.length}}">
         <text class="img_info_title">图片大小不超过8M</text>

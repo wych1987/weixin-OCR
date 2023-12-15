@@ -1,11 +1,9 @@
-import { drawImage, _image_MaxSize, _image_Type, replaceImageBase64Head } from "../../utils/index"
-import { fetchImageEnhancement } from "../../api/index"
-import{uploadMediaChoose} from "../../utils/clouldFile"
-let imageInfo = {
-  url:"",
-  type:"image"
-}
-let base64Image = "";
+import { _image_MaxSize, _image_Type, _image_base64_head } from "../../utils/index"
+import { fetchImageEnhancement, fetchBase64File } from "../../api/index"
+
+import { initQueue } from "../../utils/actionQueue"
+
+let actionQueue = {};
 Page({
   //https://cloud.tencent.com/document/product/866/80801
   /**
@@ -48,21 +46,15 @@ Page({
     }
     ]
   },
-  onLoad(options) {
-    imageInfo={
-      url:"",
-      type:"image"
-    }
+   onLoad(options) {
+    actionQueue = initQueue()
+
+  },
+  onUnload() {
+    actionQueue.destory()
   },
   onReady() {
-    const query = wx.createSelectorQuery()
-    query.select('#myCanvas')
-      .fields({ node: true, size: true })
-      .exec(async (res) => {
-        //  const dpr = wx.getSystemInfoSync().pixelRatio
-        canvas = res[0].node
-        // drawImage(canvas, img) 
-      })
+
   },
 
   async uploadImg() {
@@ -78,9 +70,6 @@ Page({
       this.setData({
         imgUrls: chooseResult.tempFiles
       });
-      const { fileList } = await uploadMediaChoose(chooseResult.tempFiles);
-      imageUrl = fileList[0].tempFileURL
-      // 
     } catch (e) {
       console.error("chooseMedia===", e)
     }
@@ -92,13 +81,53 @@ Page({
       ocrImgs: []
     });
   },
-  actionClick(e) {
+  async actionClick(e) {
     const tasktype = e.currentTarget.dataset.tasktype;
-    console.log("===TaskType===", tasktype);
-    tasktype.map(async (action) => {
-      // 同步处理图片
-      const res = await fetchImageEnhancement(imageInfo, action);
-      console.log("===res===", res);
+
+    wx.showLoading({
+      title: '处理图片',
     })
+    if (actionQueue.index<0) {
+      try {
+         await actionQueue.init(this.data.imgUrls)
+      } catch (e) {
+        wx.hideLoading();
+      }
+    }
+    await this.processActions(tasktype)
+  },
+  async processActions(tasktype) {
+    try {
+      for (let index = 0; index < tasktype.length; index++) {
+        const action = tasktype[index];
+        const imageCache = actionQueue.get();
+        const res = await fetchImageEnhancement(imageCache, action);
+        const step = {
+          url: res.data,
+          urlType: "file",
+          fileName: imageCache.fileName,
+          action
+        }
+        actionQueue.add(step);
+      }
+      const imageInfo = actionQueue.get();
+      debugger;
+      await this.showActionResult(imageInfo)
+
+    } catch (e) {
+      wx.hideLoading();
+      wx.showToast({
+        title: '啊哦,出了点差错',
+      })
+    }
+  },
+  async showActionResult(imageInfo) {
+    const base64Str = await fetchBase64File(imageInfo.url);
+    this.setData({
+      imgUrls: [{
+        url: `${_image_base64_head}${base64Str}`
+      }]
+    })
+    wx.hideLoading();
   }
 });

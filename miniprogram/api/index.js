@@ -39,7 +39,31 @@ export async function getOcrChannel(imgUrl) {
   const res = await requestGet("/api/ocrChannel")
   return res.data;
 }
-export async function fetchImageEnhancement(imageInfo, TaskType) {
-  const res = await requestPost("/api/imageEnhancement", { url: imageInfo.url, urlType: imageInfo.type, TaskType })
+export async function fetchImageEnhancement(imageInfo, taskType) {
+  const data = {
+    url: imageInfo.url,
+    urlType: imageInfo.urlType,
+    taskType: String(taskType),
+    fileName: imageInfo.fileName
+  }
+  const res = await requestPost("/api/imageEnhancement", data)
   return res.data;
+}
+export async function fetchBase64File(url) {
+  return new Promise((resovle, reject) => {
+    wx.request({
+      url:`${url}?${Math.random()}`,
+      data: {},
+      header: {
+        'content-type': 'text/plain' 
+      },
+      success(res) {
+        resovle(res.data)
+      },
+      fail(err) {
+        reject(err)
+      }
+    })
+  })
+
 }
