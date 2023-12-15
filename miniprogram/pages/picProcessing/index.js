@@ -3,25 +3,32 @@ import { fetchImageEnhancement, fetchBase64File, fetchImageClearHandwriteing } f
 
 import { initQueue } from "../../utils/actionQueue"
 
-let actionQueue = {};
-function errorCatch() {
+
+function errorCatch(e) {
+  console.error(e);
   wx.hideLoading();
   wx.showToast({
     title: '啊哦,出了点差错',
   })
 }
- 
+ function showLoading(){
+  wx.showLoading({
+    title: '处理图片',
+  })
+ }
 Page({
   //https://cloud.tencent.com/document/product/866/80801
   /**
    * 页面的初始数据
    */
   isClearHandwriting:false,
-  actionClickTime:0,
+  actionClickCount:0,
+  actionQueue:initQueue(),
   data: {
     imgUrls: [],
     ocrImgs: [],
     isBig:false,
+    isShowStep:false,
     actionList: [{
       text: "切边",// + 弯曲矫正
       tasktype: [1, 2]
@@ -49,11 +56,10 @@ Page({
     ]
   },
   onLoad(options) {
-    actionQueue = initQueue()
-    this.actionClickTime=0
+    this.actionClickCount=0
   },
   onUnload() {
-    actionQueue.destory()
+    
   },
   onReady() {
 
@@ -99,45 +105,43 @@ Page({
     });
   },
   async actionClick(e) {
-    if(actionClickCount>this.actionList.length){
+    if(this.actionClickCount>this.data.actionList.length){
       wx.showToast({
         title: '点太多次啦，服务器资源消耗过多(⊙o⊙)…',
       });
       return false;
     }
     const tasktype = e.currentTarget.dataset.tasktype;
-    wx.showLoading({
-      title: '处理图片',
-    })
+    showLoading()
     try {
-      if (actionQueue.index < 0) {
-        await actionQueue.init(this.data.imgUrls)
+      if (this.actionQueue.index < 0) {
+        debugger;
+        await this.actionQueue.init(this.data.imgUrls)
       }
       await this.processActions(tasktype);
-      this.actionClickTime++;
+      this.actionClickCount++;
     } catch (e) {
-      errorCatch()
+      errorCatch(e)
     }
   },
   async processActions(tasktype) {
     try {
       for (let index = 0; index < tasktype.length; index++) {
         const action = tasktype[index];
-        const imageCache = actionQueue.get();
+        const imageCache = this.actionQueue.get();
         const res = await fetchImageEnhancement(imageCache, action);
         const step = {
-          url: res.data,
+          url: res.fileUrl,
           urlType: "file",
-          fileName: imageCache.fileName,
+          fileName: res.fileName,
           action
         }
-        actionQueue.add(step);
+        this.actionQueue.add(step);
       }
-      const imageInfo = actionQueue.get();
+      const imageInfo = this.actionQueue.get();
       await this.showActionResult(imageInfo)
-
     } catch (e) {
-      errorCatch()
+      errorCatch(e)
     }
   },
   async showActionResult(imageInfo) {
@@ -148,35 +152,69 @@ Page({
       }]
     })
     wx.hideLoading();
+    if(this.actionQueue.queue.length>1){
+      this.setData({isShowStep:true})
+    }
+    this.setShowClearHandwriting()
   },
   async clearHandwritingClick() {
     if(this.isClearHandwriting){
       wx.showToast({
-        title: '已经擦除手写体了，只能这样了',
+        title: '已经擦除手写体了，只能这样了(⊙﹏⊙)',
       })
     }
     try {
-      wx.showLoading({
-        title: '处理图片',
-      })
-      // 把base64 扔给OCR处理
-      const imageInfo = actionQueue.get()
+      showLoading()
+      const imageInfo = this.actionQueue.get()
       const res = await fetchImageClearHandwriteing(imageInfo)
-      if(!res.data){
-        throw Error(res)
+      if(!res){
+        throw Error("fetchImageClearHandwriteing --error")
       }
       const step = {
-        url: res.data,
+        url: res.fileUrl,
         urlType: "file",
-        fileName: imageInfo.fileName,
+        fileName: res.fileName,
         action: "clearHandwriteing"
       }
-      actionQueue.add(step);
+      this.actionQueue.add(step);
       this.showActionResult(step)
       this.isClearHandwriting=true
     } catch (e) {
-      console.error(e);
-      errorCatch()
+      errorCatch(e)
+    }
+  },
+  async prevClick(){
+    try{
+      showLoading()
+      const imageInfo = this.actionQueue.prev();
+      await this.showActionResult(imageInfo)
+      this.setShowClearHandwriting()
+      wx.hideLoading();
+    }catch(e){
+      errorCatch(e)
+    }
+  },
+  async nextClick(){
+    try{
+      showLoading()
+       const imageInfo = this.actionQueue.next();
+      await this.showActionResult(imageInfo)
+      this.setShowClearHandwriting()
+      wx.hideLoading();
+    }catch(e){
+      errorCatch(e)
+    }
+  },
+  setShowClearHandwriting(){
+    if(this.actionQueue.index>0){
+      // 第一步的为原图片需要隐藏擦除手写体
+      this.setData({
+        isShowClearHandwriting:true
+      })
+    }else {
+      this.setData({
+        isShowClearHandwriting:false
+      })
     }
   }
 });

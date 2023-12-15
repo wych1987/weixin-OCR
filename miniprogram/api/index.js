@@ -47,7 +47,7 @@ export async function fetchImageEnhancement(imageInfo, taskType) {
     fileName: imageInfo.fileName
   }
   const res = await requestPost("/api/imageEnhancement", data)
-  return res.data;
+  return res.data.data;
 }
 export async function fetchImageClearHandwriteing(imageInfo) {
   const data = {
@@ -56,7 +56,7 @@ export async function fetchImageClearHandwriteing(imageInfo) {
     fileName: imageInfo.fileName
   }
   const res = await requestPost("/api/clearHandwriteing", data);
-  return res.data;
+  return res.data.data;
 }
 
 export async function fetchBase64File(url) {

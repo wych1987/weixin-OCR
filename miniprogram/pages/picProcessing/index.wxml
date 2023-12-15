@@ -1,7 +1,7 @@
 <view class="page-root">
   <view class="box_img">
       <view wx:key="index" class="box_img_item" wx:for="{{imgUrls}}" wx:for-item="img">
-        <image class="img_item" mode="aspectFit" src="{{img.tempFilePath||img.url}}" bindload="imageOnload"></image>
+        <image class="img_item" show-menu-by-longpress="true" mode="aspectFit" src="{{img.tempFilePath||img.url}}" bindload="imageOnload"></image>
       </view>
       <view class="box_img_action" wx:if="{{!imgUrls.length}}">
         <text class="img_info_title">图片大小不能超过 10M</text>
@@ -13,14 +13,13 @@
     <view class="canvas-action-item" wx:for="{{actionList}}" wx:key="text"  data-index="{{index}}" bindtap="actionClick" data-tasktype="{{item.tasktype}}">
       <text class="canvas-action-item-txt">{{item.text}}</text>
     </view>
-    <view class="canvas-action-item"   bindtap="clearHandwritingClick" style="background:#ff8907;width: 28%;">
+    <view class="canvas-action-item"   bindtap="clearHandwritingClick" style="background:#ff8907;width: 28%;" wx:if="{{isShowClearHandwriting}}">
       <text class="canvas-action-item-txt">擦除手写体</text>
     </view>
   </view>
-  <view class="img-tips-box">
-  <view class="  button-prev"  >上一步</view>
-  <view class="  button-next"  >下一步</view>
- 
+  <view class="img-tips-box"  wx:if="{{isShowStep}}">
+  <view class="  button-prev"  bind:tap="prevClick">上一步</view>
+  <Text class="img_info_tips" >长按图片保存</Text>
+  <view class="  button-next"  bind:tap="nextClick">下一步</view>
   </view>
-   <Text class="img_info_tips" wx:if="{{imgUrls.length}}">长按图片保存</Text>
 </view>

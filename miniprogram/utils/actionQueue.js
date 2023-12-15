@@ -13,9 +13,15 @@ export  function initQueue() {
       this.queue.push(actionInfo);
       this.index++;
     },
-    back: function () {
-      if (this.index) {
+    prev: function () {
+      if (this.index>0) {
         this.index--;
+      }
+      return this.queue[this.index]
+    },
+    next:function(){
+      if (this.index<this.queue.length-1) {
+        this.index++;
       }
       return this.queue[this.index]
     },
