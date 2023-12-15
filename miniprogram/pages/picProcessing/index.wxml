@@ -17,9 +17,9 @@
       <text class="canvas-action-item-txt">擦除手写体</text>
     </view>
   </view>
-  <view class="img-tips-box"  wx:if="{{isShowStep}}">
-  <view class="  button-prev"  bind:tap="prevClick">上一步</view>
+  <view class="img-tips-box"   wx:if="{{isShowStep}}">
+  <image class="button-prev"  bind:tap="prevClick" src="../../images/right.png"></image>
   <Text class="img_info_tips" >长按图片保存</Text>
-  <view class="  button-next"  bind:tap="nextClick">下一步</view>
+  <image class="  button-next"  bind:tap="nextClick" src="../../images/right.png"></image>
   </view>
 </view>

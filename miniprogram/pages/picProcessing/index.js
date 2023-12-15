@@ -160,8 +160,9 @@ Page({
   async clearHandwritingClick() {
     if(this.isClearHandwriting){
       wx.showToast({
-        title: '已经擦除手写体了，只能这样了(⊙﹏⊙)',
+        title: '已经擦除了手写体，只能这样了(⊙﹏⊙)',
       })
+      return false;
     }
     try {
       showLoading()
