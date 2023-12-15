@@ -1,5 +1,5 @@
 import { _image_MaxSize, _image_Type, _image_base64_head } from "../../utils/index"
-import { fetchImageEnhancement, fetchBase64File } from "../../api/index"
+import { fetchImageEnhancement, fetchBase64File,fetchImageClearHandwriteing } from "../../api/index"
 
 import { initQueue } from "../../utils/actionQueue"
 
@@ -17,12 +17,8 @@ Page({
       tasktype: [1, 2]
     },
     {
-      text: "去噪",
-      tasktype: [301, 302, 303]//去除模糊,去摩尔纹301：302：去除阴影  303：去除模糊
-    },
-    {
-      text: "高亮",
-      tasktype: [204]
+      text: "去阴影",
+      tasktype: [301, 302]//去除模糊,去摩尔纹301：302：去除阴影
     },
     {
       text: "灰度",
@@ -40,13 +36,9 @@ Page({
       text: "锐化",
       tasktype: [208]
     },
-    {
-      text: "去曝",
-      tasktype: [304]
-    }
     ]
   },
-   onLoad(options) {
+  onLoad(options) {
     actionQueue = initQueue()
 
   },
@@ -83,13 +75,12 @@ Page({
   },
   async actionClick(e) {
     const tasktype = e.currentTarget.dataset.tasktype;
-
     wx.showLoading({
       title: '处理图片',
     })
-    if (actionQueue.index<0) {
+    if (actionQueue.index < 0) {
       try {
-         await actionQueue.init(this.data.imgUrls)
+        await actionQueue.init(this.data.imgUrls)
       } catch (e) {
         wx.hideLoading();
       }
@@ -129,5 +120,11 @@ Page({
       }]
     })
     wx.hideLoading();
+  },
+  async clearHandwritingClick(){
+    // 把base64 扔给OCR处理
+     const imageInfo =  actionQueue.get()
+      const res = await fetchImageClearHandwriteing(imageInfo)
+
   }
 });

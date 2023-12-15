@@ -4,7 +4,8 @@
         <image class="img_item" mode="aspectFit" src="{{img.tempFilePath||img.url}}" bindload="imageOnload"></image>
       </view>
       <view class="box_img_action" wx:if="{{!imgUrls.length}}">
-        <text class="img_info_title">图片大小不超过8M</text>
+        <text class="img_info_title">图片大小不能超过 5M</text>
+        <text class="img_info_title" style="color:#ff8907">去除手写体之前先，请先初步处理图片</text>
         <view class="button" bindtap="uploadImg" wx:if="{{!haveGetImgSrc}}">选择一张图片</view>
       </view>
     </view>
@@ -12,5 +13,9 @@
     <view class="canvas-action-item" wx:for="{{actionList}}" wx:key="text"  data-index="{{index}}" bindtap="actionClick" data-tasktype="{{item.tasktype}}">
       <text class="canvas-action-item-txt">{{item.text}}</text>
     </view>
+    <view class="canvas-action-item"   bindtap="clearHandwritingClick" style="background:#ff8907;width: 28%;">
+      <text class="canvas-action-item-txt">擦除手写体</text>
+    </view>
   </view>
+  <Text class="img_info_tips" wx:if="{{imgUrls.length}}">长按图片保存</Text>
 </view>

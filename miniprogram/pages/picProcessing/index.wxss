@@ -77,3 +77,17 @@ page-root {
   color: #fff;
   text-align: center;
 }
+.img_info_tips{
+  position: absolute;
+  color:#07c160;
+  width:100%;
+  height:30rpx;
+  top:20rpx;
+  left: 0;
+  z-index: 100;
+  text-align: center;
+}
+.img_info_title{
+  color:#333;
+  display: block;
+}

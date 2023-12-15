@@ -49,6 +49,16 @@ export async function fetchImageEnhancement(imageInfo, taskType) {
   const res = await requestPost("/api/imageEnhancement", data)
   return res.data;
 }
+export async function fetchImageClearHandwriteing(imageInfo) {
+  const data = {
+    url: imageInfo.url,
+    urlType: imageInfo.urlType,
+    fileName: imageInfo.fileName
+  }
+  const res = await requestPost("/api/clearHandwriteing", data)
+  return res.data;
+}
+
 export async function fetchBase64File(url) {
   return new Promise((resovle, reject) => {
     wx.request({
