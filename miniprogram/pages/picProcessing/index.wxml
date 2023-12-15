@@ -18,8 +18,8 @@
     </view>
   </view>
   <view class="img-tips-box"   wx:if="{{isShowStep}}">
-  <image class="button-prev"  bind:tap="prevClick" src="../../images/right.png"></image>
+  <image class="button-prev"  bind:tap="prevClick" src="../../images/left.png"></image>
   <Text class="img_info_tips" >长按图片保存</Text>
-  <image class="  button-next"  bind:tap="nextClick" src="../../images/right.png"></image>
+  <image class="button-next button-transform"  bind:tap="nextClick" src="../../images/right.png"></image>
   </view>
 </view>

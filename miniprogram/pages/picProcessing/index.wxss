@@ -97,13 +97,14 @@ page-root {
   justify-content: space-between;
   align-items: center;
 }
-.button-prev{
-  transform: rotate(180deg);
-}
+ 
 .button-prev,.button-next{
-  width:40rpx;
-  height:40rpx;
+  width:60rpx;
+  height:60rpx;
   line-height: 60rpx;
   border-radius: 8rpx;
   text-align: center;  
 } 
+.button-transform{
+  transform: rotate(360deg);
+}
