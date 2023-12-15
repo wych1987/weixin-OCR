@@ -7,16 +7,16 @@ Page({
     showUploadTip: false,
     powerList: [{
       title: '一键擦除手写体',
-      tip: '快捷方便去掉作业的手写痕迹',
+      tip: '快捷方便去掉手写痕迹',
       showItem: false,
-      page: 'ocrClearImg'
+      page: 'picProcessing'
     } ,
-     {
+    /* {
       title: '文本图片处理',
       tip: '文本图片矫正、阴影去除、摩尔纹去除等,优化文档类的图片质量，提升文字的清晰度',
       showItem: false,
-      page:"picProcessing"
-    },
+      page:"ocrClearImg"
+    },*/
     {
       title: '口算训练',
       tip: '两位数的口算训练',

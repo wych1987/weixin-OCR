@@ -45,7 +45,7 @@ function drawByPath(ctx, pathArray) {
   ctx.fill();
   ctx.closePath();
 }
-export const _image_MaxSize = 5000000;
+export const _image_MaxSize = 6000000;
 export const _image_Type = "image/jpeg";
 export const _image_base64_head = "data:image/jpeg;base64,"
 export const replaceImageBase64Head = (base64Str)=>{
