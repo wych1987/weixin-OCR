@@ -5,7 +5,6 @@ export function drawImage(canvas, imgSrc) {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
-      debugger;
       ctx.drawImage(img, 0, 0, img.width, img.height);
       reslove({ success: true, data: {} })
     };
@@ -45,9 +44,15 @@ function drawByPath(ctx, pathArray) {
   ctx.fill();
   ctx.closePath();
 }
-export const _image_MaxSize = 6000000;
+export const _image_MaxSize = 10000000;
+export const _image_quality_max = 6000000;// 按6M的的百分这种压缩率
 export const _image_Type = "image/jpeg";
 export const _image_base64_head = "data:image/jpeg;base64,"
 export const replaceImageBase64Head = (base64Str)=>{
   return base64Str.replace(_image_base64_head,"");
+}
+
+export const getQualityStr = (fileSize)=>{
+    const quality = fileSize>_image_quality_max? ((_image_quality_max/fileSize)*100).toFixed():90
+  return `?imageMogr2/format/jpg|imageMogr2/quality/${quality}`
 }

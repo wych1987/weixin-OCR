@@ -1,13 +1,16 @@
 import { decode } from "./base64"
+import {_image_MaxSize} from "./index"
 export function uploadFile(filePaths) {
   const arr = []
   filePaths.forEach(filePath => {
-    if (filePath.size > 8000000) {
+    /*
+    if (filePath.size > _image_MaxSize) {
       wx.showToast({
         title: '图片大于8M，已忽略',
       });
       return false;
-    } //8M
+    }  
+    */
     const pathInfo = getFileInfoByPath(filePath.tempFilePath)
     arr.push(
       wx.cloud.uploadFile({

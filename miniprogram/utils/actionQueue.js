@@ -1,4 +1,5 @@
 import { uploadMediaChoose, randomFileNameTxt } from "./clouldFile"
+import {getQualityStr} from"./index"
 const queue = [];
 const actionInfo = {
   tempFiles: [],
@@ -23,6 +24,10 @@ export  function initQueue() {
     },
     init: async function (tempFiles) {
       const { fileList } = await uploadMediaChoose(tempFiles);
+      tempFiles.forEach((item,index)=>{
+        const q = getQualityStr(item.size);
+        fileList[index].tempFileURL = fileList[index].tempFileURL+q;
+      })
       const step = {
         url: fileList[0].tempFileURL,
         urlType: "image",

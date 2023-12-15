@@ -1,4 +1,4 @@
-import { _image_MaxSize, _image_Type, _image_base64_head } from "../../utils/index"
+import { _image_MaxSize, _image_Type, _image_base64_head,getQualityStr } from "../../utils/index"
 import { fetchImageEnhancement, fetchBase64File, fetchImageClearHandwriteing } from "../../api/index"
 
 import { initQueue } from "../../utils/actionQueue"
@@ -10,11 +10,14 @@ function errorCatch() {
     title: '啊哦,出了点差错',
   })
 }
+ 
 Page({
   //https://cloud.tencent.com/document/product/866/80801
   /**
    * 页面的初始数据
    */
+  isClearHandwriting:false,
+  actionClickTime:0,
   data: {
     imgUrls: [],
     ocrImgs: [],
@@ -47,7 +50,7 @@ Page({
   },
   onLoad(options) {
     actionQueue = initQueue()
-
+    this.actionClickTime=0
   },
   onUnload() {
     actionQueue.destory()
@@ -96,6 +99,12 @@ Page({
     });
   },
   async actionClick(e) {
+    if(actionClickCount>this.actionList.length){
+      wx.showToast({
+        title: '点太多次啦，服务器资源消耗过多(⊙o⊙)…',
+      });
+      return false;
+    }
     const tasktype = e.currentTarget.dataset.tasktype;
     wx.showLoading({
       title: '处理图片',
@@ -104,7 +113,8 @@ Page({
       if (actionQueue.index < 0) {
         await actionQueue.init(this.data.imgUrls)
       }
-      await this.processActions(tasktype)
+      await this.processActions(tasktype);
+      this.actionClickTime++;
     } catch (e) {
       errorCatch()
     }
@@ -140,6 +150,11 @@ Page({
     wx.hideLoading();
   },
   async clearHandwritingClick() {
+    if(this.isClearHandwriting){
+      wx.showToast({
+        title: '已经擦除手写体了，只能这样了',
+      })
+    }
     try {
       wx.showLoading({
         title: '处理图片',
@@ -147,20 +162,20 @@ Page({
       // 把base64 扔给OCR处理
       const imageInfo = actionQueue.get()
       const res = await fetchImageClearHandwriteing(imageInfo)
+      if(!res.data){
+        throw Error(res)
+      }
       const step = {
         url: res.data,
         urlType: "file",
-        fileName: imageCache.fileName,
+        fileName: imageInfo.fileName,
         action: "clearHandwriteing"
       }
       actionQueue.add(step);
-      const base64Str = await fetchBase64File(res);
-      this.setData({
-        imgUrls: [{
-          url: `${_image_base64_head}${base64Str}`
-        }]
-      })
+      this.showActionResult(step)
+      this.isClearHandwriting=true
     } catch (e) {
+      console.error(e);
       errorCatch()
     }
   }

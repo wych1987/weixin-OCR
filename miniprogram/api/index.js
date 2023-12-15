@@ -55,7 +55,7 @@ export async function fetchImageClearHandwriteing(imageInfo) {
     urlType: imageInfo.urlType,
     fileName: imageInfo.fileName
   }
-  const res = await requestPost("/api/clearHandwriteing", data)
+  const res = await requestPost("/api/clearHandwriteing", data);
   return res.data;
 }
 
