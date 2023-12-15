@@ -91,3 +91,29 @@ page-root {
   color:#333;
   display: block;
 }
+.img-tips-box{
+  position: absolute;
+  top:10rpx;
+  left:0rpx;
+  z-index: 100;
+}
+.button-prev,.button-next{
+  width:100rpx;
+  height:60rpx;
+  line-height: 60rpx;
+  border-radius: 8rpx;
+  border:2rpx solid   #ff8907;
+  text-align: center;
+  color:#ff8907;
+  border-color: #ff8907;
+  background-color: #fff;
+  left:150rpx;
+  top:0;
+  position: absolute;
+  z-index: 10;
+}
+.button-next{
+  left:500rpx;
+  color:#ff8907;
+  border-color: #ff8907;
+}

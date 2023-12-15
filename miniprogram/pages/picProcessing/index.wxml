@@ -17,5 +17,10 @@
       <text class="canvas-action-item-txt">擦除手写体</text>
     </view>
   </view>
-  <Text class="img_info_tips" wx:if="{{imgUrls.length}}">长按图片保存</Text>
+  <view class="img-tips-box">
+  <view class="  button-prev"  >上一步</view>
+  <view class="  button-next"  >下一步</view>
+ 
+  </view>
+   <Text class="img_info_tips" wx:if="{{imgUrls.length}}">长按图片保存</Text>
 </view>
