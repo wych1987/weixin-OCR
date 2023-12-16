@@ -42,14 +42,6 @@ Page({
       tasktype: [205]
     },
     {
-      text: "黑白",
-      tasktype: [202]
-    },
-    {
-      text: "省墨",
-      tasktype: [207]
-    },
-    {
       text: "锐化",
       tasktype: [208]
     },
