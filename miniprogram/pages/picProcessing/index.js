@@ -1,4 +1,4 @@
-import { _image_MaxSize, _image_Type, _image_base64_head,getQualityStr } from "../../utils/index"
+import { _image_MaxSize, _image_Type, _image_base64_head, getQualityStr } from "../../utils/index"
 import { fetchImageEnhancement, fetchBase64File, fetchImageClearHandwriteing } from "../../api/index"
 
 import { initQueue } from "../../utils/actionQueue"
@@ -11,24 +11,24 @@ function errorCatch(e) {
     title: '啊哦,出了点差错',
   })
 }
- function showLoading(){
+function showLoading() {
   wx.showLoading({
     title: '处理图片',
   })
- }
+}
 Page({
   //https://cloud.tencent.com/document/product/866/80801
   /**
    * 页面的初始数据
    */
-  isClearHandwriting:false,
-  actionClickCount:0,
-  actionQueue:initQueue(),
+  isClearHandwriting: false,
+  actionClickCount: 0,
+  actionQueue: initQueue(),
   data: {
     imgUrls: [],
     ocrImgs: [],
-    isBig:false,
-    isShowStep:false,
+    isBig: false,
+    isShowStep: false,
     actionList: [{
       text: "切边",// + 弯曲矫正
       tasktype: [1, 2]
@@ -56,10 +56,10 @@ Page({
     ]
   },
   onLoad(options) {
-    this.actionClickCount=0
+    this.actionClickCount = 0
   },
   onUnload() {
-    
+
   },
   onReady() {
 
@@ -79,12 +79,12 @@ Page({
         imgUrls: chooseResult.tempFiles
       });
       let isBig = false;
-      chooseResult.tempFiles.map(item=>{
-        if(item.size>_image_MaxSize){
-          isBig=true;
+      chooseResult.tempFiles.map(item => {
+        if (item.size > _image_MaxSize) {
+          isBig = true;
         }
       });
-      if(isBig){
+      if (isBig) {
         wx.showModal({
           title: '图片太大了',
           content: '图片太大了，处理不了呃',
@@ -105,7 +105,7 @@ Page({
     });
   },
   async actionClick(e) {
-    if(this.actionClickCount>this.data.actionList.length){
+    if (this.actionClickCount > this.data.actionList.length) {
       wx.showToast({
         title: '点太多次啦，服务器资源消耗过多(⊙o⊙)…',
       });
@@ -152,13 +152,13 @@ Page({
       }]
     })
     wx.hideLoading();
-    if(this.actionQueue.queue.length>1){
-      this.setData({isShowStep:true})
+    if (this.actionQueue.queue.length > 1) {
+      this.setData({ isShowStep: true })
     }
     this.setShowClearHandwriting()
   },
   async clearHandwritingClick() {
-    if(this.isClearHandwriting){
+    if (this.isClearHandwriting) {
       wx.showToast({
         title: '已经擦除了手写体，只能这样了(⊙﹏⊙)',
       })
@@ -168,7 +168,7 @@ Page({
       showLoading()
       const imageInfo = this.actionQueue.get()
       const res = await fetchImageClearHandwriteing(imageInfo)
-      if(!res){
+      if (!res) {
         throw Error("fetchImageClearHandwriteing --error")
       }
       const step = {
@@ -179,43 +179,55 @@ Page({
       }
       this.actionQueue.add(step);
       this.showActionResult(step)
-      this.isClearHandwriting=true
+      this.isClearHandwriting = true
     } catch (e) {
       errorCatch(e)
     }
   },
-  async prevClick(){
-    try{
+  async prevClick() {
+    try {
       showLoading()
       const imageInfo = this.actionQueue.prev();
       await this.showActionResult(imageInfo)
       this.setShowClearHandwriting()
       wx.hideLoading();
-    }catch(e){
+    } catch (e) {
       errorCatch(e)
     }
   },
-  async nextClick(){
-    try{
+  async nextClick() {
+    try {
       showLoading()
-       const imageInfo = this.actionQueue.next();
+      const imageInfo = this.actionQueue.next();
       await this.showActionResult(imageInfo)
       this.setShowClearHandwriting()
       wx.hideLoading();
-    }catch(e){
+    } catch (e) {
       errorCatch(e)
     }
   },
-  setShowClearHandwriting(){
-    if(this.actionQueue.index>0){
+  setShowClearHandwriting() {
+    if (this.actionQueue.index > 0) {
       // 第一步的为原图片需要隐藏擦除手写体
       this.setData({
-        isShowClearHandwriting:true
+        isShowClearHandwriting: true
       })
-    }else {
+    } else {
       this.setData({
-        isShowClearHandwriting:false
+        isShowClearHandwriting: false
       })
+    }
+  }, onShareAppMessage() {
+    return {
+      title: '一键擦除手写体',
+      path: '/pages/picProcessing/index"',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
+    }
+  },onShareTimeline(){
+    return {
+      title: '一键擦除手写体',
+      path: '/pages/picProcessing/index"',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }
 });

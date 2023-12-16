@@ -15,7 +15,7 @@ Page({
     },
     {
       title: '手动擦除手写体',
-      tip: '---还未开发---',
+      tip: '---敬请期待---',
       showItem: false,
     }
     ]
@@ -34,5 +34,17 @@ Page({
   },
 
 
-
+  onShareAppMessage() {
+    return {
+      title: '一键擦除手写体',
+      path: '/pages/index/index',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
+    }
+  }, onShareTimeline() {
+    return {
+      title: '番茄小能手，一键擦除手写体',
+      //path: '/pages/picProcessing/index"',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
+    }
+  }
 });

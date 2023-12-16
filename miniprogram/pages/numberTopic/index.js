@@ -95,5 +95,17 @@ Page({
         }
       }
     }
+  }, onShareAppMessage() {
+    return {
+      title: '番茄小能手，四则运算训练',
+      path: '/pages/numberTopic/index"',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
+    }
+  },onShareTimeline(){
+    return {
+      title: '番茄小能手，四则运算训练',
+     // path: '/pages/numberTopic/index"',
+      imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
+    }
   }
 });

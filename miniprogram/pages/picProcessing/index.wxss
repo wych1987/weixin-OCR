@@ -6,7 +6,7 @@ page-root {
 }
 
 .box_img {
-  background-color: #fff;
+  background-color: #c2e3e8ed;
   height: 80vh;
   display: flex;
   flex-direction: row;

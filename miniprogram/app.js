@@ -13,7 +13,13 @@ App({
         traceUser: true,
       });
     }
-
     this.globalData = {};
+  },
+  onPageNotFound(res){
+    console.error(res);
+    wx.redirectTo({
+      url: '/pages/index/index',
+    })
   }
+
 });
