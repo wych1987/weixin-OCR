@@ -15,7 +15,7 @@
       <view class="number-cell-line"></view>
       <view class="number-cell-input">
         <text class="number-symbol number-symbol-result">=</text>
-        <input class="number-input" bindinput="bindNumberInput" name="{{index}}" value="{{inputArray[index]}}" type="number" focus="{{index===focusIndex}}" maxlength="1" wx:for="{{topic.resultStrArray}}" wx:for-item="num" data-num="{{num}}" data-index="{{index}}" />
+        <input class="number-input" bindinput="bindNumberInput" name="{{index}}" value="{{inputArray[index]}}" type="number" maxlength="1" wx:for="{{topic.resultStrArray}}" wx:for-item="num" data-num="{{num}}" data-index="{{index}}" />
       </view>
     </view>
     <button form-type="submit" class="button">确定</button>

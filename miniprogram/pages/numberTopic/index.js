@@ -79,22 +79,7 @@ Page({
     inputArray[index] = val;
     this.setData({
       inputArray
-    });
-    if (val) {
-      if (this.data.topic.symbolNum === 0||this.data.topic.symbolNum === 2) {// 加法 乘法 由低向高
-        if (index > 0) {
-          this.setData({
-            focusIndex: index - 1
-          })
-        }
-      } else  if (this.data.topic.symbolNum === 1||this.data.topic.symbolNum === 3) {// 减法 除法由高向低
-        if (index < this.data.topic.resultStrArray.length - 1) {
-          this.setData({
-            focusIndex: Number(index) + 1
-          })
-        }
-      }
-    }
+    }); 
   }, onShareAppMessage() {
     return {
       title: '番茄小能手，四则运算训练',

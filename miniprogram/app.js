@@ -14,6 +14,11 @@ App({
       });
     }
     this.globalData = {};
+    wx.setInnerAudioOption({
+      mixWithOther:true,
+      obeyMuteSwitch:false,
+      speakerOn:true,
+    })
   },
   onPageNotFound(res){
     console.error(res);

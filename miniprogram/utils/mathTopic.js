@@ -21,7 +21,7 @@ export const rodomMathTopic = () => {
   res.symbolNum = num;
   return res
 }
-
+// 加法
 function sumTopic() {
   const num1 = Number((Math.random() * 100).toFixed());
   const num2 = Number((Math.random() * 100).toFixed());
@@ -31,6 +31,7 @@ function sumTopic() {
     result: num1 + num2
   }
 }
+// 减法
 function subTopic() {
   const res = sumTopic();
   return {
@@ -39,15 +40,24 @@ function subTopic() {
     result: res.num1
   }
 }
+// 乘法
 function mulTopic() {
+  let res = mul();
+  while (res.result > 1000||res.result<3) {
+    res = mul()
+  }
+  return res;
+}
+function mul() {
   const num1 = Number((Math.random() * 100).toFixed());
   const num2 = Number((Math.random() * 100).toFixed());
-  return {
-    num1,
-    num2,
-    result: num1 * num2
+  const result = num1 * num2;
+  return  {
+    num1, num2, result
   }
 }
+
+// 除法
 function divTopic() {
   const res = mulTopic();
   return {
@@ -56,9 +66,9 @@ function divTopic() {
     result: res.num1
   }
 }
-export function verifyTopic(result,input){
-  for(let index = 0;index<result.length;index++){
-    if(result[index]!==input[index]){
+export function verifyTopic(result, input) {
+  for (let index = 0; index < result.length; index++) {
+    if (result[index] !== input[index]) {
       return false;
     }
   }
