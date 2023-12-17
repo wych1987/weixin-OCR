@@ -8,15 +8,10 @@ Page({
       page: 'picProcessing'
     },
     {
-      title: '口算训练',
-      tip: '两位数的口算训练',
+      title: '口算练习',
+      tip: '两位数的口算练习',
       showItem: false,
       page: "numberTopic"
-    },
-    {
-      title: '手动擦除手写体',
-      tip: '---敬请期待---',
-      showItem: false,
     }
     ]
   },
