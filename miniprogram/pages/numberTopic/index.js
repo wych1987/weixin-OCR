@@ -1,6 +1,16 @@
 import { playSuccess, playError } from "../../utils/media";
-import { rodomMathTopic,verifyTopic } from "../../utils/mathTopic"
+import { rodomMathTopic, verifyTopic, keyCodeMap } from "../../utils/mathTopic"
 let timer = 0;
+let inputTimer = 0;
+const timeDelay = 200;
+function initInputArray(length) {
+  const res = [];
+  while (length > 0) {
+    res.push({ value: " ", keyCode: "" });
+    length--;
+  }
+  return res;
+}
 Page({
 
   /**
@@ -8,11 +18,13 @@ Page({
    */
   data: {
     audioChecked: true,
-    focusIndex: 0,
-    inputArray:{},
-    topicRight:0,
-    topicTime:0,
-    topicError:0,
+    focusIndex: false,
+    inputArray: [],
+    inputValue:"",
+    topicRight: 0,
+    topicTime: 0,
+    topicError: 0,
+    inputIndex:-1,
     topic: {
       num1: "",
       num2: "",
@@ -22,21 +34,20 @@ Page({
       resultStrArray: []
     }
   },
-
   onLoad() {
     this.changeTopic();
-
+    this.timer();
   },
-  onUnload(){
+  onUnload() {
     clearInterval(timer)
   },
-  timer(){
-    timer * setInterval(()=>{
+  timer() {
+    timer * setInterval(() => {
       const topicTime = this.data.topicTime;
       this.setData({
-        topicTime:topicTime+1
+        topicTime: topicTime + 1
       })
-    },1000*60)
+    }, 1000 * 60)
   },
 
   audioSwitchChange(event) {
@@ -44,19 +55,20 @@ Page({
     this.setData({ audioChecked: detail.value });
   },
   changeTopic() {
-    const topic = rodomMathTopic()
-    this.setData({ topic,inputArray:{} })
+    const topic = rodomMathTopic();
+    const inputArray = initInputArray(topic.resultStrArray.length);
+    this.setData({ topic, inputArray, focusIndex: false,inputValue:"",maxLength:inputArray.length })
   },
-  submit(event){
-    let {topicError,topicRight} = this.data;
+  submit(event) {
+    let { topicError, topicRight } = this.data;
     const values = event.detail.value;
     const resultStrArray = this.data.topic.resultStrArray;
-    const isRight=verifyTopic(resultStrArray,values);
+    const isRight = verifyTopic(resultStrArray, values);
     this.playVoice(isRight);
-    if(isRight){
+    if (isRight) {
       this.changeTopic();
       topicRight++;
-    }else{
+    } else {
       topicError++;
     }
     this.setData({
@@ -64,32 +76,56 @@ Page({
       topicRight
     })
   },
-  playVoice(success){
-    if(this.data.audioChecked===false) return ;
-    if(success){
+  playVoice(success) {
+    if (this.data.audioChecked === false) return;
+    if (success) {
       playSuccess();
-    }else{
+    } else {
       playError();
     }
   },
-  bindNumberInput(event) {
-    const val = event.detail.value;
+  textClick(event){
     const index = Number(event.currentTarget.dataset.index);
-    const inputArray = this.data.inputArray;
-    inputArray[index] = val;
-    this.setData({
-      inputArray
-    }); 
-  }, onShareAppMessage() {
+    //this.inputIndex = index;
+    this.setData({focusIndex:true,inputIndex:index})
+  },
+  bindNumberInput(event){
+    const { value, keyCode } = event.detail;
+    console.log("event.detail===", event.detail);
+    const {inputArray,inputIndex} = this.data;
+    if(keyCodeMap[keyCode]==='del'){
+       return 
+    };
+
+   this.fillTextByValue(value)
+  },
+  fillTextByValue(value){
+    const val = value.split("");
+    let {inputArray,inputIndex} = this.data;
+   
+    // 根据选择的位置控制输入的值
+    const maxIndex = inputArray.length-inputIndex;
+    let valResult = "";
+     for(let index = 0; index<val.length&&index<maxIndex;index++){
+      inputArray[inputIndex+index] = {value:val[index]};
+      valResult = `${valResult}${val[index]}`;
+     }
+      this.setData({
+        inputArray,
+        inputValue:valResult,
+       // inputIndex:valResult.length
+      })
+  },
+  onShareAppMessage() {
     return {
       title: '番茄小能手，四则运算训练',
       path: '/pages/numberTopic/index"',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
-  },onShareTimeline(){
+  }, onShareTimeline() {
     return {
       title: '番茄小能手，四则运算训练',
-     // path: '/pages/numberTopic/index"',
+      // path: '/pages/numberTopic/index"',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }

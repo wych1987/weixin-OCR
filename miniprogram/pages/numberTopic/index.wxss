@@ -28,6 +28,12 @@
   justify-content: center;
   align-items: flex-end;
 }
+.number-cell-input-result{
+  line-height: 100rpx;
+  font-size: 100rpx;
+  font-weight: 700;
+  
+}
 .number-input{
   width:70rpx;
   height:100rpx;
@@ -36,8 +42,10 @@
   line-height: 100rpx;
   font-size: 100rpx;
   font-weight: 700;
-  text-align: center;
+  text-align: right;
   margin-left: 8rpx;
+  text-align: center;
+  padding:0 10rpx;
   color:#ff8907
 }
 .number-cell-line{

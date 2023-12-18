@@ -1,4 +1,5 @@
 // app.js
+import {getOcrChannel} from "./api/index"
 App({
   onLaunch: function () {
     if (!wx.cloud) {
@@ -18,6 +19,9 @@ App({
       mixWithOther:true,
       obeyMuteSwitch:false,
       speakerOn:true,
+    });
+    getOcrChannel().then(res => {
+      this.globalData.ocrChannel = res.data
     })
   },
   onPageNotFound(res){
@@ -26,5 +30,4 @@ App({
       url: '/pages/index/index',
     })
   }
-
 });

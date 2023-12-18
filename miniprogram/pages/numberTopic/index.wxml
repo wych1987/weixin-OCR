@@ -4,22 +4,24 @@
   </View>
   <form bindsubmit="submit">
     <view class="number-show-box">
-      <View class="number-cell">
+      <view class="number-cell">
         <text class="number-text">{{topic.num1}}</text>
-      </View>
+      </view>
 
-      <View class="number-cell">
+      <view class="number-cell">
         <text class="number-symbol">{{topic.symbolStr}}</text>
         <text class="number-text">{{topic.num2}}</text>
-      </View>
-      <view class="number-cell-line"></view>
-      <view class="number-cell-input">
-        <text class="number-symbol number-symbol-result">=</text>
-        <input class="number-input" bindinput="bindNumberInput" name="{{index}}" value="{{inputArray[index]}}" type="number" maxlength="1" wx:for="{{topic.resultStrArray}}" wx:for-item="num" data-num="{{num}}" data-index="{{index}}" />
       </view>
+      <view class="number-cell-line"></view>
+      <view class="number-cell-input number-cell-input-result">
+        <text class="number-symbol number-symbol-result">=</text>
+        <text class="number-input"   type="number"  bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num"  data-index="{{index}}" >{{num.value}}</text>
+     </view>
     </view>
+      <input name="topicResult" selection-start="{{inputIndex}}" selection-end="{{inputIndex}}" focus="{{focusIndex}}" bindinput="bindNumberInput" maxlength="{{topic.resultStrArray.length}}" value="{{inputValue}}"/>
     <button form-type="submit" class="button">确定</button>
   </form>
+  
   <view class="button_clear" bindtap="changeTopic">换一题</view>
   <view class="section section_gap">
     <view class="section__title">
@@ -36,9 +38,10 @@
         <text class="topic-result-num">{{topicError}}</text>
       </view>
       <view class="topic-result-item">
-        <text>总计时：</text>
-        <text class="topic-result-num">{{topicTime}}</text>
+        <text>用时：</text>
+        <text class="topic-result-num">{{topicTime}} 分钟</text>
       </view>
     </view>
+  
   </view>
 </view>

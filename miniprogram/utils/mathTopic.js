@@ -74,3 +74,17 @@ export function verifyTopic(result, input) {
   }
   return true;
 }
+export const keyCodeMap = {
+  "8":"del",
+  "46":"del",
+  "48":0,
+  "49":1,
+  "50":2,
+  "51":3,
+  "52":4,
+  "53":5,
+  "54":6,
+  "55":7,
+  "56":8,
+  "57":9,
+}
