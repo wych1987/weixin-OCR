@@ -67,8 +67,9 @@ function divTopic() {
   }
 }
 export function verifyTopic(result, input) {
+  const inputStr = input.split("");
   for (let index = 0; index < result.length; index++) {
-    if (result[index] !== input[index]) {
+    if (result[index] !== inputStr[index]) {
       return false;
     }
   }

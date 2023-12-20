@@ -18,10 +18,11 @@
         <text class="number-input"   type="number"  bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num"  data-index="{{index}}" >{{num.value}}</text>
      </view>
     </view>
-      <input name="topicResult" selection-start="{{inputIndex}}" selection-end="{{inputIndex}}" focus="{{focusIndex}}" bindinput="bindNumberInput" maxlength="{{topic.resultStrArray.length}}" value="{{inputValue}}"/>
+      <input name="topicInputValue" selection-start="{{inputIndex}}" selection-end="{{inputIndex+1}}" focus="{{focusIndex}}" bindinput="bindNumberInput" value="{{inputValue}}" 
+      style="opacity: 0;"
+      />
     <button form-type="submit" class="button">确定</button>
   </form>
-  
   <view class="button_clear" bindtap="changeTopic">换一题</view>
   <view class="section section_gap">
     <view class="section__title">
