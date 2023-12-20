@@ -1,19 +1,19 @@
-export const rodomMathTopic = () => {
+export const rodomMathTopic = (level) => {
   const num = (Math.random() * 100).toFixed() % 4;
   const symbolArray = ["+", "-", "×", "÷"]
   let res = {}
   switch (num) {
     case 0://+
-      res = sumTopic()
+      res = sumTopic(level)
       break;
     case 1://-
-      res = subTopic()
+      res = subTopic(level)
       break;
     case 2://*
-      res = mulTopic()
+      res = mulTopic(level)
       break;
     case 3:// 除
-      res = divTopic()
+      res = divTopic(level)
       break;
   }
   res.symbolStr = symbolArray[num]
@@ -22,9 +22,11 @@ export const rodomMathTopic = () => {
   return res
 }
 // 加法
-function sumTopic() {
-  const num1 = Number((Math.random() * 100).toFixed());
-  const num2 = Number((Math.random() * 100).toFixed());
+function sumTopic(level) {
+
+  const num1 = Number((Math.random() * Math.pow(10,level)).toFixed());
+  const num2 = Number((Math.random() * Math.pow(10,level)).toFixed());
+  debugger;
   return {
     num1,
     num2,
@@ -32,8 +34,8 @@ function sumTopic() {
   }
 }
 // 减法
-function subTopic() {
-  const res = sumTopic();
+function subTopic(level) {
+  const res = sumTopic(level);
   return {
     num1: res.result,
     num2: res.num2,
@@ -41,16 +43,17 @@ function subTopic() {
   }
 }
 // 乘法
-function mulTopic() {
-  let res = mul();
-  while (res.result > 1000||res.result<3) {
-    res = mul()
+function mulTopic(level) {
+  let res = mul(level);
+  while (res.result > Math.pow(10,level+1)||res.result<Math.pow(10,level-1)) {
+    res = mul(level)
   }
   return res;
 }
-function mul() {
-  const num1 = Number((Math.random() * 100).toFixed());
-  const num2 = Number((Math.random() * 100).toFixed());
+function mul(level) {
+  const num1 = Number((Math.random() * Math.pow(10,level)).toFixed());
+  const num2 = Number((Math.random() * Math.pow(10,level)).toFixed());
+ 
   const result = num1 * num2;
   return  {
     num1, num2, result
@@ -58,8 +61,8 @@ function mul() {
 }
 
 // 除法
-function divTopic() {
-  const res = mulTopic();
+function divTopic(level) {
+  const res = mulTopic(level);
   return {
     num1: res.result,
     num2: res.num2,

@@ -22,7 +22,7 @@
   margin-bottom: 20rpx;
   height:80vw;
   background-color: #fff;
-  padding-right: 30%;
+  padding-right: 15%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,7 +46,19 @@
   margin-left: 8rpx;
   text-align: center;
   padding:0 10rpx;
-  color:#ff8907
+  color:#ff8907;
+  position: relative;
+}
+.number-input::after{
+  content: " ";
+  position: absolute;
+  height:90%;
+  top:5rpx;
+  left:53%;
+  width:4rpx;
+  background-color: #ff8907;
+  display: none;
+  z-index: 10;
 }
 .number-cell-line{
   background-color: #333;
@@ -103,7 +115,7 @@
 .number-cell-input .number-symbol-result{
   color:#ff8907;
   position: absolute;
-  right:3em;
+  left:-0.6em;
   height:120rpx;
   line-height: 120rpx;
 }
@@ -120,3 +132,36 @@
    align-items: center;
    justify-content: center;
  }
+ @keyframes van-cursor-flicker {
+  from {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+ 
+.number-input[data-cursor="true"]:after{
+  display: block;
+  animation: 1.2s van-cursor-flicker infinite;
+}
+.section__title,.section__topic_level{
+  display: flex;
+  flex-direction: row;
+  justify-self: start;
+  align-items: center;
+}
+.section__voice{
+  width: 200rpx;
+}
+.section__topic_level{
+  flex: 1;
+}
+.section_gap{
+  padding-top: 20rpx;
+}

@@ -14,21 +14,16 @@
       </view>
       <view class="number-cell-line"></view>
       <view class="number-cell-input number-cell-input-result">
-        <text class="number-symbol number-symbol-result">=</text>
-        <text class="number-input"   type="number"  bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num"  data-index="{{index}}" >{{num.value}}</text>
-     </view>
+        <text class="number-symbol number-symbol-result cursor">=</text>
+        <text class="number-input" type="number" data-cursor="{{index===inputIndex}}" bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num" data-index="{{index}}">{{num.value}}</text>
+      </view>
     </view>
-      <input name="topicInputValue" selection-start="{{inputIndex}}" selection-end="{{inputIndex+1}}" focus="{{focusIndex}}" bindinput="bindNumberInput" value="{{inputValue}}" 
-      style="opacity: 0;"
-      />
+    <input name="topicInputValue" selection-start="{{inputIndex}}" selection-end="{{inputIndex+1}}" focus="{{focusIndex}}" bindinput="bindNumberInput" value="{{inputValue}}" style="opacity: 0;" />
     <button form-type="submit" class="button">确定</button>
   </form>
   <view class="button_clear" bindtap="changeTopic">换一题</view>
   <view class="section section_gap">
-    <view class="section__title">
-      <text style="margin-right: 10rpx;">音效</text>
-      <switch checked="{{audioChecked}}" bindchange="audioSwitchChange" />
-    </view>
+  
     <view class="topic-result-box">
       <view class="topic-result-item">
         <text>提交正确答案：</text>
@@ -42,7 +37,17 @@
         <text>用时：</text>
         <text class="topic-result-num">{{topicTime}} 分钟</text>
       </view>
+      <view class="section__title">
+      <view class="section__voice">
+        <text style="margin-right: 10rpx;">音效</text>
+        <switch checked="{{audioChecked}}" bindchange="audioSwitchChange" />
+      </view>
+      <view class="section__topic_level">
+        <text style="margin-right: 10rpx;">题目难度</text>
+        <slider style="width: 300rpx;" bindchange="slider1change" show-value="true" min="1" max="4" step="1" block-size="20" block-color="#07c160" bindchange="topicLevelChange" value="2" />
+      </view>
     </view>
-  
+    </view>
+
   </view>
 </view>

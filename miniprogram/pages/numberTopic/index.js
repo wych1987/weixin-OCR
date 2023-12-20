@@ -1,10 +1,11 @@
 import { playSuccess, playError } from "../../utils/media";
 import { rodomMathTopic, verifyTopic, keyCodeMap } from "../../utils/mathTopic"
 let timer = 0;
+let topicLevel=2;
 function initInputArray(length) {
   const res = [];
   while (length > 0) {
-    res.push({ value: ""});
+    res.push({ value: "" });
     length--;
   }
   return res;
@@ -33,6 +34,9 @@ Page({
     }
   },
   onLoad() {
+
+  },
+  onReady() {
     this.changeTopic();
     this.timer();
   },
@@ -53,16 +57,17 @@ Page({
     this.setData({ audioChecked: detail.value });
   },
   changeTopic() {
-    const topic = rodomMathTopic();
+    
+    const topic = rodomMathTopic(Number(topicLevel));
     const inputArray = initInputArray(topic.resultStrArray.length);
-    console.log("====topic==",topic)
-    this.setData({ topic, inputArray, focusIndex: false, inputValue: ""})
+    console.log("====topic==", topic)
+    this.setData({ topic, inputArray, focusIndex: false, inputValue: "" })
   },
   submit(event) {
     let { topicError, topicRight } = this.data;
-    const {topicInputValue} = event.detail.value;
-    const {resultStrArray} = this.data.topic;
-    const isRight = resultStrArray.join("")===topicInputValue;
+    const { topicInputValue } = event.detail.value;
+    const { resultStrArray } = this.data.topic;
+    const isRight = resultStrArray.join("") === topicInputValue;
     this.playVoice(isRight);
     if (isRight) {
       this.changeTopic();
@@ -83,10 +88,15 @@ Page({
       playError();
     }
   },
+  topicLevelChange(event) {
+    const { value } = event.detail;
+    topicLevel = Number(value)
+    this.changeTopic();
+  },
   textClick(event) {
     const index = Number(event.currentTarget.dataset.index);
-    //this.inputIndex = index;
     // 判断点击位置，前置的数据填充
+    const { inputArray } = this.data;
     const inputValue = this.fillInputValueByIndex(index);
     this.setData({ focusIndex: true, inputIndex: index, inputValue })
   },
