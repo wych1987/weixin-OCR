@@ -15,10 +15,12 @@
       <view class="number-cell-line"></view>
       <view class="number-cell-input number-cell-input-result">
         <text class="number-symbol number-symbol-result cursor">=</text>
-        <text class="number-input" type="number" data-cursor="{{index===inputIndex}}" bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num" data-index="{{index}}">{{num.value}}</text>
+        <text class="number-input" type="number" wx:key="{{this}}" data-cursor="{{index===inputIndex}}" bind:tap="textClick" wx:for="{{inputArray}}" wx:for-item="num" data-index="{{index}}">{{num.value}}</text>
       </view>
     </view>
-    <input name="topicInputValue" selection-start="{{inputIndex}}" selection-end="{{inputIndex+1}}" focus="{{focusIndex}}" bindinput="bindNumberInput" value="{{inputValue}}" style="opacity: 0;" />
+    <input name="topicInputValue" selection-start="{{inputIndex}}" selection-end="{{inputIndex+1}}" focus="{{focusIndex}}" bindinput="bindNumberInput" value="{{inputValue}}"
+    class="input-shadow"
+     type="number"/>
     <button form-type="submit" class="button">确定</button>
   </form>
   <view class="button_clear" bindtap="changeTopic">换一题</view>

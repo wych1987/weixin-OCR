@@ -1,7 +1,7 @@
 import { playSuccess, playError } from "../../utils/media";
 import { rodomMathTopic, verifyTopic, keyCodeMap } from "../../utils/mathTopic"
 let timer = 0;
-let topicLevel=2;
+let topicLevel = 2;
 function initInputArray(length) {
   const res = [];
   while (length > 0) {
@@ -33,12 +33,16 @@ Page({
       resultStrArray: []
     }
   },
+  inputIndex: -1,
+  isNewTopic: true,
   onLoad() {
 
   },
   onReady() {
     this.changeTopic();
     this.timer();
+    this.isNewTopic = true;
+    topicLevel = 2;
   },
   onUnload() {
     clearInterval(timer)
@@ -57,23 +61,29 @@ Page({
     this.setData({ audioChecked: detail.value });
   },
   changeTopic() {
-    
     const topic = rodomMathTopic(Number(topicLevel));
     const inputArray = initInputArray(topic.resultStrArray.length);
     console.log("====topic==", topic)
-    this.setData({ topic, inputArray, focusIndex: false, inputValue: "" })
+    this.isNewTopic = true;
+    this.setData({ topic, inputArray, inputIndex: -1, inputValue: "" })
   },
   submit(event) {
-    let { topicError, topicRight } = this.data;
-    const { topicInputValue } = event.detail.value;
+    let { topicError, topicRight, inputArray } = this.data;
     const { resultStrArray } = this.data.topic;
-    const isRight = resultStrArray.join("") === topicInputValue;
+    let res = "";
+    inputArray.map(item => {
+      res = `${res}${item.value}`;
+    })
+    const isRight = resultStrArray.join("") === res;
     this.playVoice(isRight);
     if (isRight) {
       this.changeTopic();
       topicRight++;
     } else {
-      topicError++;
+      if (this.isNewTopic) {
+        topicError++;
+        this.isNewTopic = false;
+      }
     }
     this.setData({
       topicError,
@@ -95,8 +105,8 @@ Page({
   },
   textClick(event) {
     const index = Number(event.currentTarget.dataset.index);
+    this.inputIndex = index;
     // 判断点击位置，前置的数据填充
-    const { inputArray } = this.data;
     const inputValue = this.fillInputValueByIndex(index);
     this.setData({ focusIndex: true, inputIndex: index, inputValue })
   },
@@ -121,33 +131,35 @@ Page({
     const { value, keyCode } = event.detail;
     console.log("event.detail===", event.detail);
     const { inputArray, inputIndex } = this.data;
-    if (keyCodeMap[keyCode] === 'del') {
+    if (keyCodeMap.get(keyCode) === 'del') {
       // 删除前值
       inputArray[inputIndex].value = "";
+      this.inputIndex = this.inputIndex ? this.inputIndex - 1 : this.inputIndex;
       this.setData({
         inputValue: value,
         inputArray,
-        inputIndex: inputIndex ? inputIndex - 1 : inputIndex
+        inputIndex: this.inputIndex
       })
       return value;
     };
-    this.fillTextByValue(value)
+    this.fillTextByValue(value, keyCode)
   },
-  fillTextByValue(value) {
-    const val = value.split("");
-    let { inputArray, inputIndex } = this.data;
-    val.length = inputArray.length;
-    let m = inputIndex;
-    while (m < val.length) {
-      inputArray[m].value = val[m];
-      m++;
+  fillTextByValue(value, keyCode) {
+    const { inputArray } = this.data;
+    if (keyCodeMap.has(keyCode)) {
+      console.log("=====", keyCodeMap.get(keyCode));
+      if (this.inputIndex < inputArray.length) {
+        inputArray[this.inputIndex].value = keyCodeMap.get(keyCode);
+      }
+      this.inputIndex = this.inputIndex < inputArray.length - 1 ? this.inputIndex + 1 : this.inputIndex;
     }
-    this.setData({
-      inputValue: val.join(""),
-      inputArray,
-      inputIndex: inputIndex < inputArray.length - 1 ? inputIndex + 1 : inputIndex
-    })
 
+
+    this.setData({
+      inputValue: value,
+      inputArray,
+      inputIndex: this.inputIndex
+    })
   },
 
   onShareAppMessage() {

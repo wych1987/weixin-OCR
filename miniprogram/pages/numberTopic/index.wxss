@@ -165,3 +165,9 @@
 .section_gap{
   padding-top: 20rpx;
 }
+.input-shadow{
+  position: fixed;
+  top:-100000px;
+  left: -100000px;
+  opacity: 0;
+}

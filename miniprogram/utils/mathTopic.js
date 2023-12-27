@@ -24,8 +24,8 @@ export const rodomMathTopic = (level) => {
 // 加法
 function sumTopic(level) {
 
-  const num1 = Number((Math.random() * Math.pow(10,level)).toFixed());
-  const num2 = Number((Math.random() * Math.pow(10,level)).toFixed());
+  const num1 = Number((Math.random() * Math.pow(10, level)).toFixed());
+  const num2 = Number((Math.random() * Math.pow(10, level)).toFixed());
   debugger;
   return {
     num1,
@@ -45,17 +45,17 @@ function subTopic(level) {
 // 乘法
 function mulTopic(level) {
   let res = mul(level);
-  while (res.result > Math.pow(10,level+1)||res.result<Math.pow(10,level-1)) {
+  while (res.result > Math.pow(10, level + 1) || res.result < Math.pow(10, level - 1)) {
     res = mul(level)
   }
   return res;
 }
 function mul(level) {
-  const num1 = Number((Math.random() * Math.pow(10,level)).toFixed());
-  const num2 = Number((Math.random() * Math.pow(10,level)).toFixed());
- 
+  const num1 = Number((Math.random() * Math.pow(10, level)).toFixed());
+  const num2 = Number((Math.random() * Math.pow(10, level)).toFixed());
+
   const result = num1 * num2;
-  return  {
+  return {
     num1, num2, result
   }
 }
@@ -78,17 +78,17 @@ export function verifyTopic(result, input) {
   }
   return true;
 }
-export const keyCodeMap = {
-  "8":"del",
-  "46":"del",
-  "48":0,
-  "49":1,
-  "50":2,
-  "51":3,
-  "52":4,
-  "53":5,
-  "54":6,
-  "55":7,
-  "56":8,
-  "57":9,
-}
+export const keyCodeMap = new Map(
+  [[8, "del"],
+  [46, "del"],
+  [48, 0],
+  [49, 1],
+  [50, 2],
+  [51, 3],
+  [52, 4],
+  [53, 5],
+  [54, 6],
+  [55, 7],
+  [56, 8],
+  [57, 9]]
+)
