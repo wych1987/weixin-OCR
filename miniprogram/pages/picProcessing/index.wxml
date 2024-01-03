@@ -14,7 +14,7 @@
     <view class="canvas-action-item" wx:for="{{actionList}}" wx:key="text"  data-index="{{index}}" bindtap="actionClick" data-tasktype="{{item.tasktype}}">
       <text class="canvas-action-item-txt">{{item.text}}</text>
     </view>
-    <view class="canvas-action-item"   bindtap="clearHandwritingClick" style="background:#ff8907;width: 28%;" wx:if="{{isShowClearHandwriting}}">
+    <view class="canvas-action-item"   bindtap="clearHandwritingClick" style="background:#ff8907;width: 58%; margin:0 auto" wx:if="{{isShowClearHandwriting}}">
       <text class="canvas-action-item-txt">擦除手写体</text>
     </view>
   </view>

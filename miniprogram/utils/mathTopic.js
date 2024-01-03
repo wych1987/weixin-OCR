@@ -1,6 +1,7 @@
-export const rodomMathTopic = (level) => {
+export const symbolArray = ["+", "-", "×", "÷"]
+export const randomMathTopic = (level) => {
   const num = (Math.random() * 100).toFixed() % 4;
-  const symbolArray = ["+", "-", "×", "÷"]
+
   let res = {}
   switch (num) {
     case 0://+
@@ -92,3 +93,25 @@ export const keyCodeMap = new Map(
   [56, 8],
   [57, 9]]
 )
+
+export const emptyTopic = (level)=>{
+  const res = randomMathTopic(level+1);
+  // 开始挖坑
+  debugger;
+  console.log(res);
+  switch(level){
+    case 1:
+    // 1则挖两个坑  
+    // 
+    break;
+    case 2:
+     // 2则挖3个坑    
+    break;
+    case 3:
+    // 3级则挖4个坑  
+    break;
+    default:break
+  }
+  return res
+
+}

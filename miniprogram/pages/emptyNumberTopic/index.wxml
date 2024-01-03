@@ -1,0 +1,76 @@
+<view class="page-body">
+  <View class="page-title">
+    <text>加减乘除填空练习</text>
+  </View>
+  <form bindsubmit="submit">
+    <view class="number-show-box">
+      <view class="number-cell">
+        <input 
+        class="number-input" 
+        type="number" 
+        wx:key="{{this}}" 
+        data-cursor="{{index===inputIndex}}" 
+        bind:tap="textClick" 
+        wx:for="{{inputArray}}" 
+        wx:for-item="num" 
+        data-index="{{index}}" 
+        value="{{num1.value}}" 
+        name="num1{{index}}"
+        maxlength="1" />
+        <text class="number-text">{{topic.num1}}</text>
+      </view>
+
+      <view class="number-cell">
+        <text class="number-symbol">{{topic.symbolStr}}</text>
+        <text class="number-text">{{topic.num2}}</text>
+      </view>
+      <view class="number-cell-line"></view>
+      <view class="number-cell-input number-cell-input-result">
+        <text class="number-symbol number-symbol-result cursor">=</text>
+        <input 
+        class="number-input" 
+        type="number" 
+        wx:key="{{this}}" 
+        data-cursor="{{index===inputIndex}}" 
+        bind:tap="textClick" 
+        wx:for="{{inputArray}}" 
+        wx:for-item="num" 
+        data-index="{{index}}" 
+        value="{{num.value}}" 
+        name="answer{{index}}"
+        maxlength="1" />
+      </view>
+    </view>
+
+    <button form-type="submit" class="button">确定</button>
+  </form>
+  <view class="button_clear" bindtap="changeTopic">换一题</view>
+  <view class="section section_gap">
+
+    <view class="topic-result-box">
+      <view class="topic-result-item">
+        <text>提交正确答案：</text>
+        <text class="topic-result-num">{{topicRight}}</text>
+      </view>
+      <view class="topic-result-item">
+        <text>提交错误答案：</text>
+        <text class="topic-result-num">{{topicError}}</text>
+      </view>
+      <view class="topic-result-item">
+        <text>用时：</text>
+        <text class="topic-result-num">{{topicTime}} 分钟</text>
+      </view>
+      <view class="section__title">
+        <view class="section__voice">
+          <text style="margin-right: 10rpx;">音效</text>
+          <switch checked="{{audioChecked}}" bindchange="audioSwitchChange" />
+        </view>
+      </view>
+      <view class="section__topic_level">
+        <text style="margin-right: 10rpx;">题目难度</text>
+        <slider style="width: 300rpx;" bindchange="slider1change" show-value="true" min="1" max="3" step="1" block-size="20" block-color="#07c160" bindchange="topicLevelChange" value="2" />
+      </view>
+    </view>
+
+  </view>
+</view>

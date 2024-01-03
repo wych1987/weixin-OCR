@@ -9,9 +9,15 @@ Page({
     },
     {
       title: '口算练习',
-      tip: '两位数的口算练习',
+      tip: '加减乘除口算练习',
       showItem: false,
       page: "numberTopic"
+    },
+    {
+      title: '填空练习',
+      tip: '口算填空练习',
+      showItem: false,
+      page: "emptyNumberTopic"
     }
     ]
   },

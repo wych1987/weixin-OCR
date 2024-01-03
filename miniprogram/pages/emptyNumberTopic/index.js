@@ -1,5 +1,5 @@
 import { playSuccess, playError } from "../../utils/media";
-import { randomMathTopic, verifyTopic, keyCodeMap } from "../../utils/mathTopic"
+import { randomMathTopic, verifyTopic, keyCodeMap,emptyTopic } from "../../utils/mathTopic"
 let timer = 0;
 let topicLevel = 2;
 function initInputArray(length) {
@@ -43,6 +43,7 @@ Page({
     this.timer();
     this.isNewTopic = true;
     topicLevel = 2;
+    emptyTopic(topicLevel)
   },
   onUnload() {
     clearInterval(timer)
@@ -63,7 +64,7 @@ Page({
   changeTopic() {
     const topic = randomMathTopic(Number(topicLevel));
     const inputArray = initInputArray(topic.resultStrArray.length);
-    console.log("====topic==", topic)
+ 
     this.isNewTopic = true;
     this.setData({ topic, inputArray, inputIndex: -1, inputValue: "" })
   },
@@ -107,8 +108,7 @@ Page({
     const index = Number(event.currentTarget.dataset.index);
     this.inputIndex = index;
     // 判断点击位置，前置的数据填充
-    const inputValue = this.fillInputValueByIndex(index);
-    this.setData({ focusIndex: true, inputIndex: index, inputValue })
+    
   },
   fillInputValueByIndex(index) {
     const { inputArray } = this.data;
@@ -153,8 +153,6 @@ Page({
       }
       this.inputIndex = this.inputIndex < inputArray.length - 1 ? this.inputIndex + 1 : this.inputIndex;
     }
-
-
     this.setData({
       inputValue: value,
       inputArray,
