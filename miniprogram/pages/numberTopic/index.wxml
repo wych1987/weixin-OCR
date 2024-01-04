@@ -1,6 +1,6 @@
 <view class="page-body">
   <View class="page-title">
-    <text>两位数加减乘除口算练习</text>
+    <text>加减乘除口算练习</text>
   </View>
   <form bindsubmit="submit">
     <view class="number-show-box">

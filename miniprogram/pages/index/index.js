@@ -13,12 +13,12 @@ Page({
       showItem: false,
       page: "numberTopic"
     },
-    {
+   /* {
       title: '填空练习',
       tip: '口算填空练习',
       showItem: false,
       page: "emptyNumberTopic"
-    }
+    }*/
     ]
   },
   jumpPage(e) {

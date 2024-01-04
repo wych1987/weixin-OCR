@@ -75,6 +75,7 @@ Page({
       res = `${res}${item.value}`;
     })
     const isRight = resultStrArray.join("") === res;
+    this.showToast(isRight);
     this.playVoice(isRight);
     if (isRight) {
       this.changeTopic();
@@ -88,6 +89,13 @@ Page({
     this.setData({
       topicError,
       topicRight
+    })
+  },
+  showToast(success){
+    wx.showToast({
+      title: success?'正确':"错误",
+      icon: success?'success':"error",
+      duration: 1000
     })
   },
   playVoice(success) {
@@ -165,13 +173,13 @@ Page({
   onShareAppMessage() {
     return {
       title: '番茄小能手，四则运算训练',
-      path: '/pages/numberTopic/index"',
+      path: '/pages/numberTopic/index',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }, onShareTimeline() {
     return {
       title: '番茄小能手，四则运算训练',
-      // path: '/pages/numberTopic/index"',
+      // path: '/pages/numberTopic/index',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }
