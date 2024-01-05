@@ -1,36 +1,90 @@
-
 .content {
   background-color: #0c7d81;
-  height:85vh;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  padding: 40rpx 20rpx;
+  color: #fff;
+  text-align: center;
+}
+
+.topic-box {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  color:#fff;
-  text-align: center;
+  flex: 1;
 }
-.title-box{
-  height:100rpx;
+
+.title-box {
+  height: 100rpx;
 }
-.title{
- 
+
+.title {
+
   font-size: 80rpx;
   line-height: 100rpx;
 }
-.author-box{
-  height:60rpx;
+
+.author-box {
+  height: 60rpx;
   margin-bottom: 20rpx;
 }
-.author{
+
+.author {
   font-size: 30rpx;
   line-height: 60rpx;
 }
-.text-line{
-  height:80rpx;
+
+.text-line {
+  height: 80rpx;
   margin-bottom: 20rpx;
 }
-.text{
+
+.text {
   font-size: 40rpx;
 
+}
+
+.answer-box {
+  height: 280rpx;
+}
+
+.answer-title {
+  font-size: 40rpx;
+}
+
+.answer-text-box {
+  flex: 1;
+  font-size: 60rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.answer-text {
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+  line-height: 60rpx;
+  margin: 25rpx 25rpx 0 0;
+  position: relative;
+}
+
+.answer-icon {
+  position: absolute;
+  top: 0;
+  right: 0rpx;
+  height: 50rpx;
+  width: 50rpx;
+  background-color: #ff8605b6;
+  border-radius: 50rpx;
+  color: #000;
+  font-size: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  display: block;
 }
