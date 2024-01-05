@@ -5,7 +5,7 @@ Page({
       title: '一键擦除手写体',
       tip: '快捷方便去掉手写痕迹',
       showItem: false,
-      page: 'picProcessing'
+      page: 'clearHanderWriting'
     },
     {
       title: '口算练习',
@@ -13,12 +13,12 @@ Page({
       showItem: false,
       page: "numberTopic"
     },
-   /* {
-      title: '填空练习',
-      tip: '口算填空练习',
+    {
+      title: '唐诗填空',
+      tip: '唐诗三百首',
       showItem: false,
-      page: "emptyNumberTopic"
-    }*/
+      page: "tangshiTopic"
+    }
     ]
   },
   jumpPage(e) {
@@ -44,7 +44,7 @@ Page({
   }, onShareTimeline() {
     return {
       title: '番茄小能手，一键擦除手写体',
-      //path: '/pages/picProcessing/index"',
+      path: '/pages/index/index',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }

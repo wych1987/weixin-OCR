@@ -1,0 +1,16 @@
+<view>
+  <view class="content">
+    <view class="title-box">
+      <text class="title">江南曲</text>
+    </view>
+    <view class="author-box">
+      <text class="author">作者：李益</text>
+    </view>
+    <view class="text-line">
+      <text class="text">嫁得瞿塘贾，朝朝误妾期。</text>
+    </view>
+    <view class="text-line">
+      <text class="text">早知潮有信，嫁与弄潮儿。</text>
+    </view>
+  </view>
+</view>

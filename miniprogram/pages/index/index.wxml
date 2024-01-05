@@ -12,8 +12,9 @@
         <view class="power_info_text_tip">{{power.tip}}</view>
       </view>
     </view>
-   
   </view>
-  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+  <view style="margin: 50rpx;">
+   <text class="share-tips">有用就转发到微信群帮忙推广一下吧O(∩_∩)O</text>
+  </view>
 
 </view>

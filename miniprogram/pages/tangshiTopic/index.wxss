@@ -1,0 +1,36 @@
+
+.content {
+  background-color: #0c7d81;
+  height:85vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color:#fff;
+  text-align: center;
+}
+.title-box{
+  height:100rpx;
+}
+.title{
+ 
+  font-size: 80rpx;
+  line-height: 100rpx;
+}
+.author-box{
+  height:60rpx;
+  margin-bottom: 20rpx;
+}
+.author{
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+.text-line{
+  height:80rpx;
+  margin-bottom: 20rpx;
+}
+.text{
+  font-size: 40rpx;
+
+}

@@ -212,13 +212,13 @@ Page({
   }, onShareAppMessage() {
     return {
       title: '一键擦除手写体',
-      path: '/pages/picProcessing/index',
+      path: '/pages/clearHanderWriting/index',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   },onShareTimeline(){
     return {
       title: '一键擦除手写体',
-      path: '/pages/picProcessing/index',
+      path: '/pages/clearHanderWriting/index',
       imgUrl: "https://img-1320809449.cos.ap-shanghai.myqcloud.com/icon.png"
     }
   }
